@@ -13,5 +13,58 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
     - [RVMYTH modeling](#rvmyth-modeling)
     - [PLL modeling](#pll-modeling)
     - [DAC modeling](#dac-modeling)
-    - [Step by step walkthrough](#step-by-step-walkthrough)
+    - [Step by step modeling walkthrough](#step-by-step-modeling-walkthrough)
 - [Acknowledgements](#acknowledgements)
+
+# Introduction to the VSDBabySoC
+
+
+
+## What is SoC
+
+
+
+## Why to create the VSDBabySoC
+
+
+
+### What is RVMYTH
+
+
+
+### What is PLL
+
+
+
+### What is DAC
+
+
+
+## Modeling steps of the VSDBabySoC
+
+
+
+### The abstraction of the whole process
+
+
+
+### RVMYTH modeling
+
+
+
+### PLL modeling
+
+
+
+### DAC modeling
+
+
+
+### Step by step modeling walkthrough
+
+
+
+# Acknowledgements
+- [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
+- [Steve Hoover](https://github.com/stevehoover), Founder, Redwood EDA
+- [Shivani Shah](https://github.com/shivanishah269), Research Scholar at IIIT Bangalore
