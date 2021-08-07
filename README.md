@@ -3,6 +3,7 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
 
 # Table of Contents
 - [Introduction to the VSDBabySoC](#introduction-to-the-vsdbabysoc)
+  - [Problem statement](#problem-statement)
   - [What is SoC](#what-is-soc)
   - [Why to create the VSDBabySoC](#why-to-create-the-vsdbabysoc)
     - [What is RVMYTH](#what-is-rvmyth)
