@@ -63,7 +63,20 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
 
 ### Step by step modeling walkthrough
 
+In this section we will walk you through the whole process of modeling the VSDBabySoC in details. Note that the following commands are tested on the Ubuntu Bionic platform and no other OSes.
 
+  1. First we need to install some important packages:
+
+  ```
+  $ sudo apt install python python3-pip git
+  $ cd ~
+  $ pip3 install sandpiper-saas
+  ```
+  2. Now you can clone this repository in arbitrary directory:
+
+  ```
+  $ git clone 
+  ```
 
 # Acknowledgements
 - [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
