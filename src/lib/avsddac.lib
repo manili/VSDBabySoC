@@ -1,0 +1,84 @@
+library (avsddac) {
+  time_unit : "1ns";
+  voltage_unit : "1V";
+  current_unit : "1uA";
+  pulling_resistance_unit : "1kohm";
+  leakage_power_unit : "1nW";
+  capacitive_load_unit(1, pf);
+
+  type (bus_9_0) {
+    base_type : array;
+    data_type : bit;
+    bit_width : 10;
+    bit_from : 9;
+    bit_to : 0;
+    downto : true;
+  }
+
+  cell (avsddac) {
+    pin(OUT) {
+      direction : output;
+      capacitance : 0.001;
+    }
+    
+	pin (VREFH) {
+      direction : input;
+      max_transition : 2.5;
+      capacitance : 0.001;
+    }
+    
+	pin (VSSA) {
+      direction : input;
+      max_transition : 2.5;
+      capacitance : 0.001;
+    }
+    
+	pin (VDDA) {
+      direction : input;
+      max_transition : 2.5;
+      capacitance : 0.001;
+    }
+    
+	pin (VREFL) {
+      direction : input;
+      max_transition : 2.5;
+      capacitance : 0.001;
+    }
+    
+	bus (D) {
+      bus_type : bus_9_0;
+      direction : input;
+      max_transition : 2.5;
+      pin (D[0]) {
+        capacitance : 0.001;
+      }
+      pin (D[1]) {
+        capacitance : 0.001;
+      }
+      pin (D[2]) {
+        capacitance : 0.001;
+      }
+      pin (D[3]) {
+        capacitance : 0.001;
+      }
+      pin (D[4]) {
+        capacitance : 0.001;
+      }
+      pin (D[5]) {
+        capacitance : 0.001;
+      }
+      pin (D[6]) {
+        capacitance : 0.001;
+      }
+      pin (D[7]) {
+        capacitance : 0.001;
+      }
+      pin (D[8]) {
+        capacitance : 0.001;
+      }
+      pin (D[9]) {
+        capacitance : 0.001;
+      }
+    }
+  }
+} 
