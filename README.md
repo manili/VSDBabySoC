@@ -8,8 +8,7 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
   - [What is RVMYTH](#what-is-rvmyth)
   - [What is PLL](#what-is-pll)
   - [What is DAC](#what-is-dac)
-- [Modeling VSDBabySoC](#modeling-vsdbabysoc)
-  - [The abstraction of the whole process](#the-abstraction-of-the-whole-process)
+- [VSDBabySoC Modeling](#vsdbabysoc-modeling)
   - [RVMYTH modeling](#rvmyth-modeling)
   - [PLL modeling](#pll-modeling)
   - [DAC modeling](#dac-modeling)
@@ -36,13 +35,9 @@ A phase-locked loop or PLL is a control system that generates an output signal w
 
 A digital-to-analog converter or DAC is a system that converts a digital signal into an analog signal. DACs are widely used in modern communication systems enabling the generation of digitally-defined transmission signals. As a result, high-speed DACs are used for mobile communications and ultra-high-speed DACs are employed in optical communications systems.
 
-# Modeling steps of the VSDBabySoC
+# VSDBabySoC Modeling
 
-
-
-## The abstraction of the whole process
-
-
+Here we are going to model and simulate the VSDBabySoC using `iverilog`, then we will show the results using `gtkwave` tool. Some initial input signals will be fed into `vsdbabysoc` module that make the pll start generating the proper `CLK` for the circuit. The clock signal will make the `rvmyth` to execute instructions in its `imem`. As a result the register `r17` will be filled with some values cycle by cycle. These values are used by dac core to provide the final output signal named `OUT`. So we have 3 main elements (IP cores) and a wrapper as an SoC and of-course there would be also a testbench module out there.
 
 ## RVMYTH modeling
 
