@@ -78,9 +78,9 @@ In this section we will walk you through the whole process of modeling the VSDBa
   3. It's time to run the compiling script:
 
   ```
-  $ cd VSDBabySoC/Modeling
-  $ chmod +x ./compile.sh
-  $ ./compile.sh
+  $ cd VSDBabySoC/src
+  $ chmod +x ./pre_synth_sim.sh
+  $ ./pre_synth_sim.sh
   ```
   
   Everything will be stored in `out` directory.
@@ -88,7 +88,8 @@ In this section we will walk you through the whole process of modeling the VSDBa
   4. You can watch the waveforms with following command:
 
   ```
-  $ gtkwave out/vsdbabysoc.vcd
+  $ cd ../pre_synth_sim
+  $ gtkwave pre_synth_sim.vcd
   ```
   
   Two most important signals are `CLK` and `OUT`. The `CLK` signal is provided by the PLL and the `OUT` is the output of the DAC model. Here is the final result of the modeling process:
