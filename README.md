@@ -80,7 +80,7 @@ In this section we will walk you through the whole process of modeling the VSDBa
   $ ./pre_synth_sim.sh
   ```
   
-  Everything will be stored in `out` directory.
+  Any outputs will be stored in `pre_synth_sim` directory.
 
   4. You can watch the waveforms with following command:
 
