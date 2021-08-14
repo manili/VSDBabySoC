@@ -16,7 +16,7 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
   - [OpenLane installation](#openlane-installation)
   - [Synthesizing using Yosys](#synthesizing-using-yosys)
     - [How to synthesize the design](#how-to-synthesize-the-design)
-    - [Post-synthesis simulation (GLS)](#post-synthesis-simulation-(gls))
+    - [Post-synthesis simulation (GLS)](#post-synthesis-simulation-gls)
 - [Acknowledgements](#acknowledgements)
 
 # Introduction to the VSDBabySoC
