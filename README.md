@@ -108,19 +108,34 @@ In this section we will walk you through the whole process of modeling the VSDBa
 
 ## OpenLane installation
 
+* OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault,SPEF-Extractor and custom methodology scripts for design exploration and optimization.
+The OpenLANE and sky130 installation can be done by following the steps in this repository `https://github.com/nickson-jose/openlane_build_script`.
 
+* More information on OpenLANE can be found in this repository `https://github.com/efabless/openlane` .
+
+* After finishing off the installation, the first step in the design flow is to synthesize the generated RTL code.
 
 ## Synthesizing using Yosys
 
-
+* In OpenLane the RTL synthesis is performed by `yosys`.
+* The technology mapping is performed by `abc`.
+* Finally, the timing reports are generated for the resulting synthesized netlist by `OpenSTA`.
 
 ### How to synthesize the design
 
+To perform the synthesis process just do the following:
 
+  ```
+  $ cd ~/VSDBabySoC/src
+  $ chmod +x ./post_synth_sim.sh
+  $ ./post_synth_sim.sh
+  ```
+
+The heavy job will be done by the script.
 
 ### Post-synthesis simulation (GLS)
 
-
+There is an issue for post-synthesis simulation (Gate-Level Simulation) which can be tracked [here](https://github.com/google/skywater-pdk/issues/310).
 
 # Acknowledgements
 - [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
