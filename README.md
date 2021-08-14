@@ -12,11 +12,16 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
   - [RVMYTH modeling](#rvmyth-modeling)
   - [PLL and DAC modeling](#pll-and-dac-modeling)
   - [Step by step modeling walkthrough](#step-by-step-modeling-walkthrough)
+- [VSDBabySoC ]
 - [Acknowledgements](#acknowledgements)
 
 # Introduction to the VSDBabySoC
 
 VSDBabySoC is a small yet powerful RISCV-based SoC. The main purpose of designing such a small SoC is to test three open-source IP cores together for the first time and calibrate the analog part of it. VSDBabySoC contains one RVMYTH microprocessor, an 8x-PLL to generate a stable clock, and a 10-bit DAC to communicate with other analog devices.
+
+## Problem statement
+
+This work discusses the different aspects of designing a small SoC based on RVMYTH (a RISCV-based processor). This SoC will leverage a PLL as its clock generator and controller and a 10-bit DAC as a way to talk to the outside world. Other electrical devices with proper analog input like televisions, and mobile phones could manipulate DAC output and provide users with music sound or video frames. At the end of the day, it is possible to use this small fully open-source and well-documented SoC which has been fabricated under Sky130 technology, for educational purposes.
 
 ## What is SoC
 
