@@ -10,8 +10,7 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
   - [What is DAC](#what-is-dac)
 - [VSDBabySoC Modeling](#vsdbabysoc-modeling)
   - [RVMYTH modeling](#rvmyth-modeling)
-  - [PLL modeling](#pll-modeling)
-  - [DAC modeling](#dac-modeling)
+  - [PLL and DAC modeling](#pll-and-dac-modeling)
   - [Step by step modeling walkthrough](#step-by-step-modeling-walkthrough)
 - [Acknowledgements](#acknowledgements)
 
@@ -38,18 +37,20 @@ A digital-to-analog converter or DAC is a system that converts a digital signal 
 # VSDBabySoC Modeling
 
 Here we are going to model and simulate the VSDBabySoC using `iverilog`, then we will show the results using `gtkwave` tool. Some initial input signals will be fed into `vsdbabysoc` module that make the pll start generating the proper `CLK` for the circuit. The clock signal will make the `rvmyth` to execute instructions in its `imem`. As a result the register `r17` will be filled with some values cycle by cycle. These values are used by dac core to provide the final output signal named `OUT`. So we have 3 main elements (IP cores) and a wrapper as an SoC and of-course there would be also a testbench module out there.
+In the following sections we will mention some repos that we used to model the SoC. However the main source code is resided in [Source-Code Directory](src) and these modules are in [module](src/module) subdirectory.
 
 ## RVMYTH modeling
 
+As we mentioned in [What is RVMYTH](#what-is-rvmyth) section, RVMYTH is designed and created by the TL-Verilog language. So we need a way for compile and trasform it to the Verilog language and use the result in our SoC. Here the `sandpiper-saas` could help us do the job.
 
+  [Here](https://github.com/shivanishah269/risc-v-core) is the repo we used as a reference to model the RVMYTH
 
-## PLL modeling
+## PLL and DAC modeling
 
+It is not possible to sythesis an analog design with Verilog, yet. But there is a chance to simulate it using `real` datatype. We will use the following repositories to model the PLL and DAC cores:
 
-
-## DAC modeling
-
-
+  1. [Here](https://github.com/vsdip/rvmyth_avsdpll_interface) is the repo we used as a reference to model the PLL
+  2. [Here](https://github.com/vsdip/rvmyth_avsddac_interface) is the repo we used as a reference to model the DAC
 
 ## Step by step modeling walkthrough
 
