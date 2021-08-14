@@ -118,7 +118,7 @@ In this section we will walk you through the whole process of modeling the VSDBa
 
 
 
-### Post-synthesis simulation
+### Post-synthesis simulation (GLS)
 
 
 
