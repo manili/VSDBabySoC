@@ -93,7 +93,7 @@ In this section we will walk you through the whole process of modeling the VSDBa
   
   Two most important signals are `CLK` and `OUT`. The `CLK` signal is provided by the PLL and the `OUT` is the output of the DAC model. Here is the final result of the modeling process:
   
-  ![VSDBabySoC_Model](Images/VSDBabySoC_Model.png)
+  ![VSDBabySoC_Model](images/VSDBabySoC_Model.png)
 
 # Acknowledgements
 - [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
