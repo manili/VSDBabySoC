@@ -12,7 +12,11 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
   - [RVMYTH modeling](#rvmyth-modeling)
   - [PLL and DAC modeling](#pll-and-dac-modeling)
   - [Step by step modeling walkthrough](#step-by-step-modeling-walkthrough)
-- [VSDBabySoC ]
+- [VSDBabySoC physical design](#vsdbabysoc-physical-design)
+  - [OpenLane installation](#openlane-installation)
+  - [Synthesizing using Yosys](#synthesizing-using-yosys)
+    - [How to synthesize the design](#how-to-synthesize-the-design)
+    - [Post-synthesis simulation (GLS)](#post-synthesis-simulation-(gls))
 - [Acknowledgements](#acknowledgements)
 
 # Introduction to the VSDBabySoC
@@ -97,6 +101,26 @@ In this section we will walk you through the whole process of modeling the VSDBa
   Two most important signals are `CLK` and `OUT`. The `CLK` signal is provided by the PLL and the `OUT` is the output of the DAC model. Here is the final result of the modeling process:
   
   ![VSDBabySoC_Model](images/VSDBabySoC_Model.png)
+
+# VSDBabySoC physical design
+
+
+
+## OpenLane installation
+
+
+
+## Synthesizing using Yosys
+
+
+
+### How to synthesize the design
+
+
+
+### Post-synthesis simulation
+
+
 
 # Acknowledgements
 - [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
