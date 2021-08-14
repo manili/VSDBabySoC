@@ -111,7 +111,7 @@ In this section we will walk you through the whole process of modeling the VSDBa
 * OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault,SPEF-Extractor and custom methodology scripts for design exploration and optimization.
 The OpenLANE and sky130 installation can be done by following the steps in this repository `https://github.com/nickson-jose/openlane_build_script`.
 
-* More information on OpenLANE can be found in this repository `https://github.com/efabless/openlane` .
+* More information on OpenLane can be found in this repository `https://github.com/efabless/openlane` .
 
 * After finishing off the installation, the first step in the design flow is to synthesize the generated RTL code.
 
