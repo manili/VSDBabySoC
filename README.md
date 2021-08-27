@@ -69,7 +69,8 @@ In this section we will walk you through the whole process of modeling the VSDBa
   1. First we need to install some important packages:
 
   ```
-  $ sudo apt install python python3-pip git iverilog gtkwave
+  $ sudo apt install python python3-pip git iverilog gtkwave docker.io
+  $ sudo chmod 666 /var/run/docker.sock
   $ cd ~
   $ pip3 install sandpiper-saas
   ```
@@ -81,21 +82,19 @@ In this section we will walk you through the whole process of modeling the VSDBa
   $ git clone https://github.com/manili/VSDBabySoC.git
   ```
 
-  3. It's time to run the compiling script:
+  3. It's time to make the `pre_synth_sim.vcd`:
 
   ```
-  $ cd VSDBabySoC/src
-  $ chmod +x ./pre_synth_sim.sh
-  $ ./pre_synth_sim.sh
+  $ cd VSDBabySoC
+  $ make pre_synth_sim
   ```
   
-  Any outputs will be stored in `pre_synth_sim` directory.
+  The result of the simulation (i.e. `pre_synth_sim.vcd`) will be stored in the `output/pre_synth_sim` directory.
 
   4. You can watch the waveforms with following command:
 
   ```
-  $ cd ../pre_synth_sim
-  $ gtkwave pre_synth_sim.vcd
+  $ gtkwave output/pre_synth_sim/pre_synth_sim.vcd
   ```
   
   Two most important signals are `CLK` and `OUT`. The `CLK` signal is provided by the PLL and the `OUT` is the output of the DAC model. Here is the final result of the modeling process:
