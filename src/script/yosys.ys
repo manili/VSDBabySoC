@@ -1,5 +1,5 @@
 read_verilog ./module/vsdbabysoc.v
-read_verilog -I../post_synth_sim -I./include ../post_synth_sim/rvmyth.v
+read_verilog -I./include ../output/compiled_tlv/rvmyth.v
 read_verilog -I./include ./module/clk_gate.v
 read_liberty -lib ./lib/avsd_pll_1v8.lib
 read_liberty -lib ./lib/avsddac.lib
@@ -13,4 +13,4 @@ setundef -zero
 clean -purge
 rename -enumerate
 stat
-write_verilog -noattr ../post_synth_sim/vsdbabysoc.synth.v
+write_verilog -noattr ../output/synth/vsdbabysoc.synth.v

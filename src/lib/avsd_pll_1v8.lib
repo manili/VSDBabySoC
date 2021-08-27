@@ -6,6 +6,15 @@ library (avsd_pll_1v8) {
   leakage_power_unit : "1nW";
   capacitive_load_unit(1, pf);
 
+  slew_lower_threshold_pct_fall : 20.000000000;
+  slew_lower_threshold_pct_rise : 20.000000000;
+  slew_upper_threshold_pct_fall :  80.00000000;
+  slew_upper_threshold_pct_rise :  80.00000000;
+  input_threshold_pct_fall : 50.000000000;
+  input_threshold_pct_rise : 50.000000000;
+  output_threshold_pct_fall : 50.000000000;
+  output_threshold_pct_rise : 50.000000000;
+
   cell (avsd_pll_1v8) {
     pin (VSSD) {
       direction : input;
