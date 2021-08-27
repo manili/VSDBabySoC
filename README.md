@@ -64,15 +64,15 @@ It is not possible to sythesis an analog design with Verilog, yet. But there is 
 
 ## Step by step modeling walkthrough
 
-In this section we will walk you through the whole process of modeling the VSDBabySoC in details. We will increase/decrease the digital output value and feed it to the DAC model so we can watch the changes on the SoC output. Please, note that the following commands are tested on the Ubuntu Bionic platform and no other OSes.
+In this section we will walk you through the whole process of modeling the VSDBabySoC in details. We will increase/decrease the digital output value and feed it to the DAC model so we can watch the changes on the SoC output. Please, note that the following commands are tested on the Ubuntu Bionic (18.04.5) platform and no other OSes.
 
   1. First we need to install some important packages:
 
   ```
-  $ sudo apt install python python3-pip git iverilog gtkwave docker.io
+  $ sudo apt install make python python3 python3-pip git iverilog gtkwave docker.io
   $ sudo chmod 666 /var/run/docker.sock
   $ cd ~
-  $ pip3 install sandpiper-saas
+  $ pip3 install pyyaml click sandpiper-saas
   ```
 
   2. Now you can clone this repository in arbitrary directory (we'll choose home directory here):
@@ -110,27 +110,40 @@ In this section we will walk you through the whole process of modeling the VSDBa
 * OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault,SPEF-Extractor and custom methodology scripts for design exploration and optimization.
 The OpenLANE and sky130 installation can be done by following the steps in this repository `https://github.com/nickson-jose/openlane_build_script`.
 
-* More information on OpenLane can be found in this repository `https://github.com/efabless/openlane` .
+* More information on OpenLane can be found in the following repositories:
 
-* After finishing off the installation, the first step in the design flow is to synthesize the generated RTL code.
+  * `https://github.com/The-OpenROAD-Project/OpenLane`
+  * `https://github.com/efabless/openlane`
+
+To summerize the installation processes:
+
+  ```
+  $ git clone https://github.com/The-OpenROAD-Project/OpenLane.git
+  $ cd OpenLane/
+  $ make openlane
+  $ make pdk
+  $ make test
+  ```
+
+For more info please refer to the GitHub repositories.
 
 ## Synthesizing using Yosys
 
+* The first step in the design flow is to synthesize the generated RTL code.
 * In OpenLane the RTL synthesis is performed by `yosys`.
 * The technology mapping is performed by `abc`.
 * Finally, the timing reports are generated for the resulting synthesized netlist by `OpenSTA`.
 
 ### How to synthesize the design
 
-To perform the synthesis process just do the following:
+To perform the synthesis process do the following:
 
   ```
-  $ cd ~/VSDBabySoC/src
-  $ chmod +x ./post_synth_sim.sh
-  $ ./post_synth_sim.sh
+  $ cd ~/VSDBabySoC
+  $ make synth
   ```
 
-The heavy job will be done by the script.
+The heavy job will be done by the script. When the process has been done, you can see the result in the `output/synth/vsdbabysoc.synth.v` file.
 
 ### Post-synthesis simulation (GLS)
 
