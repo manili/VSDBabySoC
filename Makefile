@@ -2,6 +2,7 @@ SRC_PATH = src
 MODULE_PATH = $(SRC_PATH)/module
 OUTPUT_PATH = output
 OPENLANE_PATH = /home/manili/OpenLane
+OPENLANE_VER = 2021.08.22_03.28.34
 
 STA_PATH = $(OUTPUT_PATH)/sta
 SYNTH_PATH = $(OUTPUT_PATH)/synth
@@ -61,11 +62,11 @@ openlane:
 			-v $(shell pwd):/VSDBabySoC \
 			-e PDK_ROOT=$(OPENLANE_PATH)/pdks \
 			-u 1000:1000 \
-			efabless/openlane:2021.08.22_03.28.34; \
+			efabless/openlane:$(OPENLANE_VER); \
 	fi
 
 synth: openlane $(COMPILED_TLV_PATH)
-	if [ ! -f "output/synth/vsdbabysoc.synth.v" ]; then \
+	if [ ! -f "$(SYNTH_PATH)/vsdbabysoc.synth.v" ]; then \
 		mkdir -p $(SYNTH_PATH); \
 		docker exec -it $< bash -c "cd /VSDBabySoC/src; yosys -s /VSDBabySoC/src/script/yosys.ys"; \
 	fi
