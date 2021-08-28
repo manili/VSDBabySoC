@@ -121,6 +121,9 @@ In integrated circuit design, physical design is a step in the standard design c
 ## OpenLane installation
 
 * OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault,SPEF-Extractor and custom methodology scripts for design exploration and optimization.
+
+  ![openlane_flow](images/openlane_flow.png)
+
 The OpenLANE and sky130 installation can be done by following the steps in this repository `https://github.com/nickson-jose/openlane_build_script`.
 
 * More information on OpenLane can be found in the following repositories:
