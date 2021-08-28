@@ -12,7 +12,7 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
   - [RVMYTH modeling](#rvmyth-modeling)
   - [PLL and DAC modeling](#pll-and-dac-modeling)
   - [Step by step modeling walkthrough](#step-by-step-modeling-walkthrough)
-- [VSDBabySoC physical design](#vsdbabysoc-physical-design)
+- [VSDBabySoC Physical Design](#vsdbabysoc-physical-design)
   - [OpenLane installation](#openlane-installation)
   - [Synthesizing using Yosys](#synthesizing-using-yosys)
     - [How to synthesize the design](#how-to-synthesize-the-design)
@@ -112,9 +112,11 @@ In this picture we can see the following signals:
 
 **PLEASE NOTE** that the sythesis process does not support `real` variables, so we must use the simple `wire` datatype for the `\vsdbabysoc.OUT` instead. The `iverilog` simulator always behaves `wire` as a digital signal. As a result we can not see the analog output via `\vsdbabysoc.OUT` port and we need to use `\dac.OUT` (which is a `real` datatype) instead.
 
-# VSDBabySoC physical design
+# VSDBabySoC Physical Design
 
+In integrated circuit design, physical design is a step in the standard design cycle which follows after the circuit design. At this step, circuit representations of the components (devices and interconnects) of the design are converted into geometric representations of shapes which, when manufactured in the corresponding layers of materials, will ensure the required functioning of the components. This geometric representation is called integrated circuit layout. This step is usually split into several sub-steps, which include both design and verification and validation of the layout.
 
+  ![physical_design](images/physical_design)
 
 ## OpenLane installation
 
