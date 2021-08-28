@@ -116,7 +116,7 @@ In this picture we can see the following signals:
 
 In integrated circuit design, physical design is a step in the standard design cycle which follows after the circuit design. At this step, circuit representations of the components (devices and interconnects) of the design are converted into geometric representations of shapes which, when manufactured in the corresponding layers of materials, will ensure the required functioning of the components. This geometric representation is called integrated circuit layout. This step is usually split into several sub-steps, which include both design and verification and validation of the layout.
 
-  ![physical_design](images/physical_design)
+  ![physical_design](images/physical_design.png)
 
 ## OpenLane installation
 
