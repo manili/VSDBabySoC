@@ -17,6 +17,7 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
   - [Synthesizing using Yosys](#synthesizing-using-yosys)
     - [How to synthesize the design](#how-to-synthesize-the-design)
     - [Post-synthesis simulation (GLS)](#post-synthesis-simulation-gls)
+- [Contributors](#contributors)
 - [Acknowledgements](#acknowledgements)
 
 # Introduction to the VSDBabySoC
@@ -190,7 +191,12 @@ In this picture we can see the following signals:
 
 **PLEASE NOTE** that the sythesis process does not support `real` variables, so we must use the simple `wire` datatype for the `\vsdbabysoc.OUT` instead. The `iverilog` simulator always behaves `wire` as a digital signal. As a result we can not see the analog output via `\vsdbabysoc.OUT` port and we need to use `\dac.OUT` (which is a `real` datatype) instead.
 
+# Contributors
+
+- [Mohammad A. Nili](https://github.com/manili), M.S. Student at SRBIAU
+
 # Acknowledgements
+
 - [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
 - [Steve Hoover](https://github.com/stevehoover), Founder, Redwood EDA
 - [Shivani Shah](https://github.com/shivanishah269), Research Scholar at IIIT Bangalore
