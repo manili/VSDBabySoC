@@ -91,7 +91,7 @@ In this section we will walk you through the whole process of modeling the VSDBa
   
   The result of the simulation (i.e. `pre_synth_sim.vcd`) will be stored in the `output/pre_synth_sim` directory.
 
-  4. You can watch the waveforms with following command:
+  4. You can see the waveforms with following command:
 
   ```
   $ gtkwave output/pre_synth_sim/pre_synth_sim.vcd
@@ -100,6 +100,8 @@ In this section we will walk you through the whole process of modeling the VSDBa
   Two most important signals are `CLK` and `OUT`. The `CLK` signal is provided by the PLL and the `OUT` is the output of the DAC model. Here is the final result of the modeling process:
   
   ![pre_synth_sim](images/pre_synth_sim.png)
+
+**PLEASE NOTE** that the sythesis process does not support `real` variables, so we must use the simple `wire` datatype for the `vsdbabysoc/OUT` instead. The `iverilog` simulator always behaves `wire` as a digital signal. As a result we can not see the analog output via `vsdbabysoc/OUT` port and we need to use `dac/OUT` (which is a `real` datatype) instead.
 
 # VSDBabySoC physical design
 
@@ -147,7 +149,30 @@ The heavy job will be done by the script. When the process has been done, you ca
 
 ### Post-synthesis simulation (GLS)
 
-There is an issue for post-synthesis simulation (Gate-Level Simulation) which can be tracked [here](https://github.com/google/skywater-pdk/issues/310).
+There is an issue for post-synthesis simulation (Gate-Level Simulation) which can be tracked [here](https://github.com/google/skywater-pdk/issues/310). However, we hacked the source-code by the following instructions and we managed to workaround the issue for now:
+
+  1. We can simulate with the functional models by passing the `FUNCTIONAL` define to `iverilog`. Also we need to set `UNIT_DELAY` macro to some value:
+
+    `iverilog -DFUNCTIONAL -DUNIT_DELAY=#1 <THE SOURCE-CODEs TO BE COMPILED>`
+
+  2. We should manually correct `endif SKY130_FD_SC_HD__LPFLOW_BLEEDER_FUNCTIONAL_V` to `endif //SKY130_FD_SC_HD__LPFLOW_BLEEDER_FUNCTIONAL_V`
+
+User could bypass these confusing steps by using our provided Makefile:
+
+  ```
+  $ cd ~/VSDBabySoC
+  $ make post_synth_sim
+  ```
+The result of the simulation (i.e. `post_synth_sim.vcd`) will be stored in the `output/post_synth_sim` directory and the waveform could be seen by the following command:
+
+  ```
+  $ gtkwave output/post_synth_sim/post_synth_sim.vcd
+  ```
+Here is the final result:
+
+  ![post_synth_sim](images/post_synth_sim.png)
+
+**PLEASE NOTE** that the sythesis process does not support `real` variables, so we must use the simple `wire` datatype for the `vsdbabysoc/OUT` instead. The `iverilog` simulator always behaves `wire` as a digital signal. As a result we can not see the analog output via `vsdbabysoc/OUT` port and we need to use `dac/OUT` (which is a `real` datatype) instead.
 
 # Acknowledgements
 - [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
