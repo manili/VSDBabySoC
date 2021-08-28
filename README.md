@@ -101,7 +101,15 @@ In this section we will walk you through the whole process of modeling the VSDBa
   
   ![pre_synth_sim](images/pre_synth_sim.png)
 
-**PLEASE NOTE** that the sythesis process does not support `real` variables, so we must use the simple `wire` datatype for the `vsdbabysoc/OUT` instead. The `iverilog` simulator always behaves `wire` as a digital signal. As a result we can not see the analog output via `vsdbabysoc/OUT` port and we need to use `dac/OUT` (which is a `real` datatype) instead.
+In this picture we can see the following signals:
+
+  * **CLK:** This is the `input CLK` signal of the `RVMYTH` core. This signal comes from the PLL, originally.
+  * **reset:** This is the `input reset` signal of the `RVMYTH` core. This signal comes from an external source, originally.
+  * **OUT:** This is the `output OUT` signal of the `VSDBabySoC` module. This signal comes from the DAC (due to simulation restrictions it behaves like a digital signal which is incorrect), originally.
+  * **RV_TO_DAC[9:0]:** This is the 10-bit `output [9:0] OUT` port of the `RVMYTH` core. This port comes from the RVMYTH register #17, originally.
+  * **OUT:** This is a `real` datatype wire which can simulate analog values. It is the `output wire real OUT` signal of the `DAC` module. This signal comes from the DAC, originally.
+
+**PLEASE NOTE** that the sythesis process does not support `real` variables, so we must use the simple `wire` datatype for the `\vsdbabysoc.OUT` instead. The `iverilog` simulator always behaves `wire` as a digital signal. As a result we can not see the analog output via `\vsdbabysoc.OUT` port and we need to use `\dac.OUT` (which is a `real` datatype) instead.
 
 # VSDBabySoC physical design
 
@@ -172,7 +180,15 @@ Here is the final result:
 
   ![post_synth_sim](images/post_synth_sim.png)
 
-**PLEASE NOTE** that the sythesis process does not support `real` variables, so we must use the simple `wire` datatype for the `vsdbabysoc/OUT` instead. The `iverilog` simulator always behaves `wire` as a digital signal. As a result we can not see the analog output via `vsdbabysoc/OUT` port and we need to use `dac/OUT` (which is a `real` datatype) instead.
+In this picture we can see the following signals:
+
+  * **\core.CLK:** This is the `input CLK` signal of the `RVMYTH` core. This signal comes from the PLL, originally.
+  * **reset:** This is the `input reset` signal of the `RVMYTH` core. This signal comes from an external source, originally.
+  * **OUT:** This is the `output OUT` signal of the `VSDBabySoC` module. This signal comes from the DAC (due to simulation restrictions it behaves like a digital signal which is incorrect), originally.
+  * **\core.OUT[9:0]:** This is the 10-bit `output [9:0] OUT` port of the `RVMYTH` core. This port comes from the RVMYTH register #17, originally.
+  * **OUT:** This is a `real` datatype wire which can simulate analog values. It is the `output wire real OUT` signal of the `DAC` module. This signal comes from the DAC, originally.
+
+**PLEASE NOTE** that the sythesis process does not support `real` variables, so we must use the simple `wire` datatype for the `\vsdbabysoc.OUT` instead. The `iverilog` simulator always behaves `wire` as a digital signal. As a result we can not see the analog output via `\vsdbabysoc.OUT` port and we need to use `\dac.OUT` (which is a `real` datatype) instead.
 
 # Acknowledgements
 - [Kunal Ghosh](https://github.com/kunalg123), Co-founder, VSD Corp. Pvt. Ltd.
