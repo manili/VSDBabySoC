@@ -18,6 +18,7 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
     - [How to synthesize the design](#how-to-synthesize-the-design)
     - [Post-synthesis simulation (GLS)](#post-synthesis-simulation-gls)
     - [Yosys final report](#yosys-final-report)
+  - [Static timing analysis using OpenSTA](#static-timing-analysis-using-opensta)
 - [Contributors](#contributors)
 - [Acknowledgements](#acknowledgements)
 
@@ -259,6 +260,52 @@ In this picture we can see the following signals:
    Area for cell type \avsdpll1v8 is unknown!
 
    Chip area for module '\vsdbabysoc': 58173.292800
+  ```
+
+## Static timing analysis using OpenSTA
+
+OpenSTA is a gate level static timing verifier. As a stand-alone executable it can be used to verify the timing of a design using standard file formats. For more info about the OpenSTA see [here](https://github.com/The-OpenROAD-Project/OpenSTA).
+
+### Static timing analysis on the design
+
+Due to lack of the proper PLL liberty file for the STA, we should consider the output port of the PLL (PLL.CLK) as the clock. Here is the SDC file content:
+
+  ```
+  set_units -time ns
+  set clk_pin [lindex [get_pins -of_objects [get_cells  pll]] 7]
+  create_clock -name clk -period 11 $clk_pin
+  ```
+
+And here is the output of the OpenSTA tool:
+
+  ```
+  Startpoint: _9532_ (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: _10034_ (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+    Delay    Time   Description
+  ---------------------------------------------------------
+     0.00    0.00   clock clk (rise edge)
+     0.00    0.00   clock network delay (ideal)
+     0.00    0.00 ^ _9532_/CLK (sky130_fd_sc_hd__dfxtp_1)
+     4.40    4.40 ^ _9532_/Q (sky130_fd_sc_hd__dfxtp_1)
+     5.06    9.47 v _8103_/Y (sky130_fd_sc_hd__clkinv_1)
+     0.54   10.01 ^ _8106_/Y (sky130_fd_sc_hd__o211ai_1)
+     0.00   10.01 ^ _10034_/D (sky130_fd_sc_hd__dfxtp_1)
+            10.01   data arrival time
+
+    11.00   11.00   clock clk (rise edge)
+     0.00   11.00   clock network delay (ideal)
+     0.00   11.00   clock reconvergence pessimism
+            11.00 ^ _10034_/CLK (sky130_fd_sc_hd__dfxtp_1)
+    -0.13   10.87   library setup time
+            10.87   data required time
+  ---------------------------------------------------------
+            10.87   data required time
+           -10.01   data arrival time
+  ---------------------------------------------------------
+             0.86   slack (MET)
   ```
 
 # Contributors
