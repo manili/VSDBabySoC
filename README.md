@@ -325,7 +325,15 @@ In integrated circuit design, physical design is a step in the standard design c
 
 ## OpenLANE details and flow
 
+Here is the picture of the OpenLANE architecture:
+
   ![openlane_flow](images/openlane_flow.png)
+
+OpenLANE flow consists of several stages. By default all flow steps are run in sequence. Each stage may consist of multiple sub-stages. [Here](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/README.md) you can find a lot of info about the flow and its internal tools.
+
+  * [This](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/docs/source/advanced_readme.md) link contains info about how to run OpenLANE in `interactive` mode.
+  * [This](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/configuration/README.md) link contains info about different variables for configuration.
+  * [This](https://openlane.readthedocs.io/en/develop/docs/source/hardening_macros.html) link contains info about building hard macros using OpenLANE.
 
 # Contributors
 
