@@ -116,8 +116,6 @@ In this picture we can see the following signals:
 
 **PLEASE NOTE** that the sythesis process does not support `real` variables, so we must use the simple `wire` datatype for the `\vsdbabysoc.OUT` instead. The `iverilog` simulator always behaves `wire` as a digital signal. As a result we can not see the analog output via `\vsdbabysoc.OUT` port and we need to use `\dac.OUT` (which is a `real` datatype) instead.
 
-  ![physical_design](images/physical_design.png)
-
 # OpenLANE
 
 * OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, SPEF-Extractor and custom methodology scripts for design exploration and optimization. We need OpenLANE for the synthesis and STA process, so we will talk about its installation process here and its details in the next couple of sections.
@@ -312,6 +310,8 @@ And here is the output of the OpenSTA tool:
 # VSDBabySoC Physical Design
 
 In integrated circuit design, physical design is a step in the standard design cycle which follows after the circuit design. At this step, circuit representations of the components (devices and interconnects) of the design are converted into geometric representations of shapes which, when manufactured in the corresponding layers of materials, will ensure the required functioning of the components. This geometric representation is called integrated circuit layout. This step is usually split into several sub-steps, which include both design and verification and validation of the layout.
+
+  ![physical_design](images/physical_design.png)
 
 ## OpenLANE details and flow
 
