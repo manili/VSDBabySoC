@@ -141,7 +141,7 @@ To summerize the installation processes:
 
 For more info please refer to the GitHub repositories.
 
-**PLEASE NOTE** that currently we are using commit `8580c248a995b575f7734813b80bb6c4aa82d4f2` for OpenLANE and docker image version is `2021.09.09_03.00.48`.
+**PLEASE NOTE** that currently we are using commit version `8580c248a995b575f7734813b80bb6c4aa82d4f2` for the OpenLANE and our docker image version is `2021.09.09_03.00.48`.
 
 # Post-synthesis simulation
 
