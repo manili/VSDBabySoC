@@ -333,7 +333,9 @@ OpenLANE flow consists of several stages. By default all flow steps are run in s
 
   * [This](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/docs/source/advanced_readme.md) link contains info about how to run OpenLANE in `interactive` mode.
   * [This](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/configuration/README.md) link contains info about different variables for configuration.
-  * [This](https://openlane.readthedocs.io/en/develop/docs/source/hardening_macros.html) link contains info about building hard macros using OpenLANE.
+  * [This](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/docs/source/hardening_macros.md) link contains info about building hard macros using OpenLANE.
+
+We leveraged info of these links during the project to build the VSDBabySoC layout.
 
 # Contributors
 
