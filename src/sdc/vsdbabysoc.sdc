@@ -1,1 +1,2 @@
-create_clock -name clk -period 10 [get_ports CLK];
+set_units -time ns
+create_clock [get_pins {pll/CLK}] -name clk -period 11

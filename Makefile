@@ -2,7 +2,7 @@ SRC_PATH = src
 MODULE_PATH = $(SRC_PATH)/module
 OUTPUT_PATH = output
 OPENLANE_PATH = /home/manili/OpenLane
-OPENLANE_VER = 2021.08.22_03.28.34
+OPENLANE_VER = 2021.09.09_03.00.48
 
 STA_PATH = $(OUTPUT_PATH)/sta
 SYNTH_PATH = $(OUTPUT_PATH)/synth
@@ -68,9 +68,11 @@ openlane:
 synth: openlane $(COMPILED_TLV_PATH)
 	if [ ! -f "$(SYNTH_PATH)/vsdbabysoc.synth.v" ]; then \
 		mkdir -p $(SYNTH_PATH); \
-		docker exec -it $< bash -c "cd /VSDBabySoC/src; yosys -s /VSDBabySoC/src/script/yosys.ys"; \
+		docker exec -it $< bash -c "cd /VSDBabySoC/src; yosys -s /VSDBabySoC/src/script/yosys.ys | tee ../output/synth/synth.log"; \
 	fi
 
 sta: openlane synth
-	mkdir -p $(STA_PATH)
-	docker exec -it $< bash -c "cd /VSDBabySoC/src; sta -exit -threads max /VSDBabySoC/src/script/sta.conf"
+	if [ ! -f "$(STA_PATH)/sta.log" ]; then \
+		mkdir -p $(STA_PATH); \
+		docker exec -it $< bash -c "cd /VSDBabySoC/src; sta -exit -threads max /VSDBabySoC/src/script/sta.conf | tee ../output/sta/sta.log"; \
+	fi

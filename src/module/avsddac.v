@@ -1,4 +1,4 @@
-module avsddac( OUT, D, VREFH, VREFL);
+module avsddac(OUT, D, VREFH, VREFL);
 
   input VREFH;
   input VREFL;
