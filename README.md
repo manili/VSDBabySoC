@@ -23,6 +23,12 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
     - [Static timing analysis on the design](#static-timing-analysis-on-the-design)
 - [VSDBabySoC Physical Design](#vsdbabysoc-physical-design)
   - [OpenLANE details and flow](#openlane-details-and-flow)
+  - [RVMYTH RTL2GDSII flow](#rvmyth-rtl2gdsii-flow)
+    - [RVMYTH flow configuration](#rvmyth-flow-configuration)
+    - [RVMYTH flow running](#rvmyth-flow-running)
+    - [RVMYTH post-routing STA](#rvmyth-post-routing-sta)
+    - [RVMYTH post-routing simulation](#rvmyth-post-routing-simulation)
+    - [RVMYTH final GDSII layout](#rvmyth-final-gdsii-layout)
 - [Contributors](#contributors)
 - [Acknowledgements](#acknowledgements)
 
