@@ -24,6 +24,7 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
 - [VSDBabySoC Physical Design](#vsdbabysoc-physical-design)
   - [OpenLANE details and flow](#openlane-details-and-flow)
   - [RVMYTH RTL2GDSII flow](#rvmyth-rtl2gdsii-flow)
+    - [RVMYTH setting up the environment](#rvmyth-setting-up-the-environment)
     - [RVMYTH flow configuration](#rvmyth-flow-configuration)
     - [RVMYTH flow running](#rvmyth-flow-running)
     - [RVMYTH post-routing STA](#rvmyth-post-routing-sta)
@@ -341,7 +342,41 @@ OpenLANE flow consists of several stages. By default all flow steps are run in s
   * [This](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/configuration/README.md) link contains info about different variables for configuration.
   * [This](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/docs/source/hardening_macros.md) link contains info about building hard macros using OpenLANE.
 
-We leveraged info of these links during the project to build the VSDBabySoC layout.
+We'll leverage info of these links during the project to build the VSDBabySoC layout.
+
+## RVMYTH RTL2GDSII flow
+
+Here we are going to implement a fully digital design using OpenLANE. This way we can get our hands dirty and learn a lot about the OpenLANE flow. Implementing mixed-signal layout without gathering knowledge of this step is pretty much tough.
+
+### RVMYTH setting up the environment
+
+We are using `OPENLANE_PATH` environment variable to reference the OpenLANE installed directory. As an example imagine we have installed the OpenLANE in the following directory `~/OpenLane`, so the value of the `OPENLANE_PATH` variable would be `~/OpenLane`. So do the following to setup the environment for the RVMYTH layout implementation:
+
+  ```
+  $make rvmyth_layout
+  ```
+
+
+
+### RVMYTH flow configuration
+
+
+
+### RVMYTH flow running
+
+
+
+### RVMYTH post-routing STA
+
+
+
+### RVMYTH post-routing simulation
+
+
+
+### RVMYTH final GDSII layout
+
+
 
 # Contributors
 
