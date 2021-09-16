@@ -20,6 +20,7 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
   - [Post-synthesis simulation (GLS)](#post-synthesis-simulation-gls)
   - [Yosys final report](#yosys-final-report)
   - [Static timing analysis using OpenSTA](#static-timing-analysis-using-opensta)
+    - [Static timing analysis on the design](#static-timing-analysis-on-the-design)
 - [VSDBabySoC Physical Design](#vsdbabysoc-physical-design)
   - [OpenLANE details and flow](#openlane-details-and-flow)
 - [Contributors](#contributors)
