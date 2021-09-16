@@ -121,7 +121,7 @@ In this picture we can see the following signals:
 
 # OpenLANE
 
-* OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, SPEF-Extractor and custom methodology scripts for design exploration and optimization. The main usage of OpenLANE in this project is for [VSDBabySoC Physical Design](#vsdbabysoc-physical-design). However, we need OpenLANE for the synthesis and STA process in the [Post-synthesis simulation](#post-synthesis-simulation) section. So we'll talk about its installation process here and let the details be, until the [VSDBabySoC Physical Design](#vsdbabysoc-physical-design) section.
+OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, SPEF-Extractor and custom methodology scripts for design exploration and optimization. The main usage of OpenLANE in this project is for [VSDBabySoC Physical Design](#vsdbabysoc-physical-design). However, we need OpenLANE for the synthesis and STA process in the [Post-synthesis simulation](#post-synthesis-simulation) section. So we'll talk about its installation process here and let the details be, until the [VSDBabySoC Physical Design](#vsdbabysoc-physical-design) section.
 
 ## OpenLANE instalation
 
