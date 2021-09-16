@@ -267,15 +267,21 @@ OpenSTA is a gate level static timing verifier. As a stand-alone executable it c
 
 ### Static timing analysis on the design
 
-Due to lack of the proper PLL liberty file for the STA, we should consider the output port of the PLL (PLL.CLK) as the clock. Here is the SDC file content:
+Due to lack of the proper PLL and DAC liberty files for complete/correct STA, we should consider the output port of the PLL (PLL.CLK) as the clock and analyze the timing of the RVMYTH core. Here is the SDC file content:
 
   ```
   set_units -time ns
-  set clk_pin [lindex [get_pins -of_objects [get_cells  pll]] 7]
-  create_clock -name clk -period 11 $clk_pin
+  create_clock [get_pins {pll/CLK}] -name clk -period 11
   ```
 
-And here is the output of the OpenSTA tool:
+Now to start the analyzing process we should do the following:
+
+  ```
+  $ cd ~/VSDBabySoC
+  $ make sta
+  ```
+
+And now here is the output of the OpenSTA tool:
 
   ```
   Startpoint: _9532_ (rising edge-triggered flip-flop clocked by clk)
