@@ -120,9 +120,7 @@ In this picture we can see the following signals:
 
 # OpenLANE
 
-* OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, SPEF-Extractor and custom methodology scripts for design exploration and optimization.
-
-  ![openlane_flow](images/openlane_flow.png)
+* OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, SPEF-Extractor and custom methodology scripts for design exploration and optimization. We need OpenLANE for the synthesis and STA process, so we will talk about its installation process here and its details in the next couple of sections.
 
 ## OpenLANE instalation
 
@@ -314,6 +312,10 @@ And here is the output of the OpenSTA tool:
 # VSDBabySoC Physical Design
 
 In integrated circuit design, physical design is a step in the standard design cycle which follows after the circuit design. At this step, circuit representations of the components (devices and interconnects) of the design are converted into geometric representations of shapes which, when manufactured in the corresponding layers of materials, will ensure the required functioning of the components. This geometric representation is called integrated circuit layout. This step is usually split into several sub-steps, which include both design and verification and validation of the layout.
+
+## OpenLANE details and flow
+
+  ![openlane_flow](images/openlane_flow.png)
 
 # Contributors
 
