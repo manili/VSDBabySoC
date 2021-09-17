@@ -24,6 +24,17 @@ clean:
 	rm -rf $(OUTPUT_PATH)
 	rm -rf $(OPENLANE_PATH)/designs/rvmyth
 
+.PHONY: mount
+mount:
+	docker run -it --rm \
+		-v $(OPENLANE_PATH):/openLANE_flow \
+		-v $(OPENLANE_PATH)/pdks:/openLANE_flow/pdks \
+		-v $(shell pwd):/VSDBabySoC \
+		-e PDK_ROOT=/openLANE_flow/pdks \
+		-u 1000:1000 \
+		efabless/openlane:$(OPENLANE_VER) \
+		bash
+
 $(COMPILED_TLV_PATH): $(MODULE_PATH)/*.tlv
 	sandpiper-saas -i $< -o rvmyth.v \
 		--bestsv --noline -p verilog --outdir $@
@@ -51,9 +62,9 @@ synth: $(COMPILED_TLV_PATH)
 		mkdir -p $(SYNTH_PATH); \
 		docker run -it --rm \
 			-v $(OPENLANE_PATH):/openLANE_flow \
-			-v $(OPENLANE_PATH)/pdks:$(OPENLANE_PATH)/pdks \
+			-v $(OPENLANE_PATH)/pdks:/openLANE_flow/pdks \
 			-v $(shell pwd):/VSDBabySoC \
-			-e PDK_ROOT=$(OPENLANE_PATH)/pdks \
+			-e PDK_ROOT=/openLANE_flow/pdks \
 			-u 1000:1000 \
 			efabless/openlane:$(OPENLANE_VER) \
 			bash -c "cd /VSDBabySoC/src; yosys -s /VSDBabySoC/src/script/yosys.ys | tee ../output/synth/synth.log"; \
@@ -64,9 +75,9 @@ sta: synth
 		mkdir -p $(STA_PATH); \
 		docker run -it --rm \
 			-v $(OPENLANE_PATH):/openLANE_flow \
-			-v $(OPENLANE_PATH)/pdks:$(OPENLANE_PATH)/pdks \
+			-v $(OPENLANE_PATH)/pdks:/openLANE_flow/pdks \
 			-v $(shell pwd):/VSDBabySoC \
-			-e PDK_ROOT=$(OPENLANE_PATH)/pdks \
+			-e PDK_ROOT=/openLANE_flow/pdks \
 			-u 1000:1000 \
 			efabless/openlane:$(OPENLANE_VER) \
 			bash -c "cd /VSDBabySoC/src; sta -exit -threads max /VSDBabySoC/src/script/sta.conf | tee ../output/sta/sta.log"; \
@@ -86,15 +97,15 @@ rvmyth_layout: $(COMPILED_TLV_PATH)
 		cp $(INCLUDE_PATH)/*.vh $(OPENLANE_PATH)/designs/rvmyth/src/include; \
 		docker run -it --rm \
 			-v $(OPENLANE_PATH):/openLANE_flow \
-			-v $(OPENLANE_PATH)/pdks:$(OPENLANE_PATH)/pdks \
+			-v $(OPENLANE_PATH)/pdks:/openLANE_flow/pdks \
 			-v $(shell pwd):/VSDBabySoC \
-			-e PDK_ROOT=$(OPENLANE_PATH)/pdks \
+			-e PDK_ROOT=/openLANE_flow/pdks \
 			-u 1000:1000 \
 			efabless/openlane:$(OPENLANE_VER) \
 			bash -c "./flow.tcl -design rvmyth -tag rvmyth_test | tee /VSDBabySoC/output/rvmyth_layout/layout.log"; \
 		rm -rf $(OUTPUT_PATH)/rvmyth_layout/rvmyth_test; \
 		cp -r $(OPENLANE_PATH)/designs/rvmyth/runs/* $(OUTPUT_PATH)/rvmyth_layout; \
-	else if [ ! -d "$(OUTPUT_PATH)/rvmyth_layout/rvmyth_test" ]; then \
+	elif [ ! -d "$(OUTPUT_PATH)/rvmyth_layout/rvmyth_test" ]; then \
 		mkdir -p $(OUTPUT_PATH)/rvmyth_layout; \
 		cp -r $(OPENLANE_PATH)/designs/rvmyth/runs/* $(OUTPUT_PATH)/rvmyth_layout; \
 	fi
