@@ -492,7 +492,16 @@ The report can be found in `output/rvmyth_layout/sta.log` file.
 
 ### RVMYTH final GDSII layout
 
-To see the final GDSII layout, we must first change directory to `output/rvmyth_layout/rvmyth_test/results/magic` (because we need to access `.magicrc` file) and then open the `rvmyth.gds` file by `magic` software.
+To see the final GDSII layout, we must first change directory to `output/rvmyth_layout/rvmyth_test/results/magic` (because we need to access `.magicrc` file) and then open the `rvmyth.gds` file by `magic` software. So here it is:
+
+  ```
+  $cd ~/VSDBabySoC
+  $cd output/rvmyth_layout/rvmyth_test/results/magic
+  $magic rvmyth.gds
+  ```
+Now here is the final result of the RVMYTH GDSII layout.
+
+  ![rvmyth_layout](images/rvmyth_layout.png)
 
 # Contributors
 
