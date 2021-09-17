@@ -34,7 +34,7 @@ initial begin
     reset = 1'h0;
     #(CLK_PERIOD) reset = 1'h1;
     #(CLK_PERIOD * 3) reset = 1'h0;
-    #(CLK_PERIOD * 1000) $finish;
+    #(CLK_PERIOD * 3000) $finish;
 end
 
 endmodule
