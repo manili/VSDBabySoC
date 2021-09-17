@@ -350,19 +350,19 @@ Here we are going to implement a fully digital design using OpenLANE. This way w
 
 ### RVMYTH setting up the environment
 
-We are using `OPENLANE_PATH` environment variable to reference the OpenLANE installed directory. As an example imagine we have installed the OpenLANE in the `~/OpenLane` directory, so the value of the `OPENLANE_PATH` variable would be `~/OpenLane`. This value should be changed in the [Makefile](Makefile) before any progress.
+We are using `OPENLANE_PATH` environment variable to reference the OpenLANE installed directory. As an example imagine we have installed the OpenLANE in the `~/OpenLane` directory, so the value of the `OPENLANE_PATH` variable would be `~/OpenLane`. This value should be changed in the [Makefile](Makefile#L6) before any progress.
 
 ### RVMYTH flow configuration
 
-  
-
-  ```
-  $make rvmyth_layout
-  ```
+We have provided minimum required configurations in [this](src/layout_conf/rvmyth/config.tcl) file. However, the file could be change accorting to other requirements. This file will be copied directly to the OpenLANE `designs/rvmyth` folder for layout implementation.
 
 ### RVMYTH flow running
 
 
+
+  ```
+  $make rvmyth_layout
+  ```
 
 ### RVMYTH post-routing STA
 
