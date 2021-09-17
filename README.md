@@ -23,6 +23,8 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
     - [Static timing analysis on the design](#static-timing-analysis-on-the-design)
 - [VSDBabySoC Physical Design](#vsdbabysoc-physical-design)
   - [OpenLANE details and flow](#openlane-details-and-flow)
+  - [Other required tools](#other-required-tools)
+    - [Magic](#magic)
   - [RVMYTH RTL2GDSII flow](#rvmyth-rtl2gdsii-flow)
     - [RVMYTH layout generation setting up the environment](#rvmyth-layout-generation-setting-up-the-environment)
     - [RVMYTH layout generation flow configuration](#rvmyth-layout-generation-flow-configuration)
@@ -343,6 +345,14 @@ OpenLANE flow consists of several stages. By default all flow steps are run in s
   * [This](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/docs/source/hardening_macros.md) link contains info about building hard macros using OpenLANE.
 
 We'll leverage info of these links during the project to build the VSDBabySoC layout.
+
+## Other required tools
+
+Although OpenLANE integrates all required tools in its flow, sometimes we need to use a toolset direclt from our host OS/Ubuntu. As an example it is not possible to open GUI of the `Magic VLSI Layout` software from the OpenLANE docker container due to container command line nature. So we need to install the tool on our main OS/Ubuntu and open it from there (not the container).
+
+### Magic
+
+[Magic](https://github.com/RTimothyEdwards/magic) is a venerable VLSI layout tool, written in the 1980's at Berkeley by John Ousterhout, now famous primarily for writing the scripting interpreter language Tcl. Due largely in part to its liberal Berkeley open-source license, magic has remained popular with universities and small companies. The open-source license has allowed VLSI engineers with a bent toward programming to implement clever ideas and help magic stay abreast of fabrication technology. However, it is the well thought-out core algorithms which lend to magic the greatest part of its popularity. Magic is widely cited as being the easiest tool to use for circuit layout, even for people who ultimately rely on commercial tools for their product design flow. [Here](https://github.com/RTimothyEdwards/magic/blob/master/INSTALL) is how to install it on a machine.
 
 ## RVMYTH RTL2GDSII flow
 
