@@ -24,9 +24,9 @@ VSDBabySoC is a small SoC including PLL, DAC and a RISCV-based processor named R
 - [VSDBabySoC Physical Design](#vsdbabysoc-physical-design)
   - [OpenLANE details and flow](#openlane-details-and-flow)
   - [RVMYTH RTL2GDSII flow](#rvmyth-rtl2gdsii-flow)
-    - [RVMYTH setting up the environment](#rvmyth-setting-up-the-environment)
-    - [RVMYTH flow configuration](#rvmyth-flow-configuration)
-    - [RVMYTH flow running](#rvmyth-flow-running)
+    - [RVMYTH layout generation setting up the environment](#rvmyth-layout-generation-setting-up-the-environment)
+    - [RVMYTH layout generation flow configuration](#rvmyth-layout-generation-flow-configuration)
+    - [RVMYTH layout generation flow running](#rvmyth-layout-generation-flow-running)
     - [RVMYTH post-routing STA](#rvmyth-post-routing-sta)
     - [RVMYTH post-routing simulation](#rvmyth-post-routing-simulation)
     - [RVMYTH final GDSII layout](#rvmyth-final-gdsii-layout)
@@ -348,27 +348,40 @@ We'll leverage info of these links during the project to build the VSDBabySoC la
 
 Here we are going to implement a fully digital design using OpenLANE. This way we can get our hands dirty and learn a lot about the OpenLANE flow. Implementing mixed-signal layout without gathering knowledge of this step is pretty much tough.
 
-### RVMYTH setting up the environment
+### RVMYTH layout generation setting up the environment
 
 We are using `OPENLANE_PATH` environment variable to reference the OpenLANE installed directory. As an example imagine we have installed the OpenLANE in the `~/OpenLane` directory, so the value of the `OPENLANE_PATH` variable would be `~/OpenLane`. This value should be changed in the [Makefile](Makefile#L6) before any progress.
 
-### RVMYTH flow configuration
+### RVMYTH layout generation flow configuration
 
 We have provided minimum required configurations in [this](src/layout_conf/rvmyth/config.tcl) file. However, the file could be change accorting to other requirements. This file will be copied directly to the OpenLANE `designs/rvmyth` folder for layout implementation.
 
-### RVMYTH flow running
+### RVMYTH layout generation flow running
 
-
+The RVMYTH layout generation flow could be all started by the following command.
 
   ```
   $make rvmyth_layout
   ```
 
-### RVMYTH post-routing STA
-
-
+[The script](Makefile#L75) will take care of the rest of the process. The process should take about 20mins depending on the PC/laptop hardware configurations. After that results can be found in the `output/rvmyth_layout` folder.
 
 ### RVMYTH post-routing simulation
+
+The following command will produce a file named `post_routing_sim.vcd` which can be used to simulate post-routing and powered model.
+
+  ```
+  $make rvmyth_post_routing_sim
+  $gtkwave out/rvmyth_layout/post_routing_sim.vcd
+  ```
+
+Here is the result.
+
+  ![post_routing_sim](images/post_routing_sim.png)
+
+As it can be seen the result is exactly the same as the previous results.
+
+### RVMYTH post-routing STA
 
 
 
