@@ -348,7 +348,7 @@ We'll leverage info of these links during the project to build the VSDBabySoC la
 
 ## Other required tools
 
-Although OpenLANE integrates all required tools in its flow, sometimes we need to use a toolset direclt from our host OS/Ubuntu. As an example it is not possible to open GUI of the `Magic VLSI Layout` software from the OpenLANE docker container due to container command line nature. So we need to install the tool on our main OS/Ubuntu and open it from there (not the container).
+Although OpenLANE integrates all required tools in its flow, sometimes we need to use a toolset direcltly from our host OS/Ubuntu. As an example it is not possible to open GUI of the `Magic VLSI Layout` software from the OpenLANE docker container due to container command line nature. So we need to install the tool on our main OS/Ubuntu and open it from there (not the container).
 
 ### Magic
 
