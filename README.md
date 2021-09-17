@@ -383,7 +383,102 @@ As it can be seen the result is exactly the same as the previous results.
 
 ### RVMYTH post-routing STA
 
+In this step we are going to do STA on the RVMYTH design. First we should create a timing database that we will query for STA. Follow the instructions:
 
+  ```
+  $make mount
+  $./flow.tcl -design rvmyth -tag rvmyth_test -interactive | tee /VSDBabySoC/output/rvmyth_layout/sta.log
+  %openroad
+  %read_lef designs/rvmyth/runs/rvmyth_test/tmp/merged.lef
+  %read_def designs/rvmyth/runs/rvmyth_test/results/cts/rvmyth.cts.def
+  %write_db designs/rvmyth/runs/rvmyth_test/rvmyth.db
+  ```
+
+Now we can query the database and excract the STA out of it by the following commands (**NOTE** that we are still in **OpenROAD** environment o/w we should re-enter the environment):
+
+  ```
+  %read_db designs/rvmyth/runs/rvmyth_test/rvmyth.db
+  %read_verilog designs/rvmyth/runs/rvmyth_test/results/lvs/rvmyth.lvs.powered.v
+  %read_liberty $::env(LIB_SYNTH_COMPLETE)
+  %link_design rvmyth
+  %read_sdc scripts/base.sdc
+  %set_propagated_clock [all_clocks]
+  %report_checks -path_delay min_max -format full_clock_expanded -digits 4
+  %exit
+  %exit
+  $exit
+  ```
+
+Here is the `min_max` analysis result:
+
+  ```
+  Startpoint: _09644_ (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: _09612_ (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+      Delay      Time   Description
+  -------------------------------------------------------------
+     0.0000    0.0000   clock CLK (rise edge)
+     0.0000    0.0000   clock source latency
+     0.0100    0.0100 ^ CLK (in)
+     0.1302    0.1402 ^ clkbuf_0_CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.2797    0.4199 ^ clkbuf_4_7_0_CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.2127    0.6326 ^ clkbuf_leaf_21_CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0000    0.6326 ^ _09644_/CLK (sky130_fd_sc_hd__dfxtp_1)
+     0.3158    0.9484 v _09644_/Q (sky130_fd_sc_hd__dfxtp_1)
+     0.0000    0.9484 v _09612_/D (sky130_fd_sc_hd__dfxtp_2)
+               0.9484   data arrival time
+
+     0.0000    0.0000   clock CLK (rise edge)
+     0.0000    0.0000   clock source latency
+     0.0100    0.0100 ^ CLK (in)
+     0.1302    0.1402 ^ clkbuf_0_CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.4999    0.6401 ^ clkbuf_4_12_0_CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.2775    0.9176 ^ clkbuf_leaf_42_CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0000    0.9176 ^ _09612_/CLK (sky130_fd_sc_hd__dfxtp_2)
+     0.0000    0.9176   clock reconvergence pessimism
+    -0.0434    0.8741   library hold time
+               0.8741   data required time
+  -------------------------------------------------------------
+               0.8741   data required time
+              -0.9484   data arrival time
+  -------------------------------------------------------------
+               0.0743   slack (MET)
+
+
+  Startpoint: _09572_ (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: OUT[5] (output port clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+      Delay      Time   Description
+  -------------------------------------------------------------
+     0.0000    0.0000   clock CLK (rise edge)
+     0.0000    0.0000   clock source latency
+     0.0100    0.0100 ^ CLK (in)
+     0.1302    0.1402 ^ clkbuf_0_CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.6871    0.8273 ^ clkbuf_4_8_0_CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.2944    1.1217 ^ clkbuf_leaf_97_CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0000    1.1217 ^ _09572_/CLK (sky130_fd_sc_hd__dfxtp_1)
+     0.3045    1.4261 ^ _09572_/Q (sky130_fd_sc_hd__dfxtp_1)
+     0.1444    1.5706 ^ output7/X (sky130_fd_sc_hd__clkbuf_2)
+     0.0000    1.5706 ^ OUT[5] (out)
+               1.5706   data arrival time
+
+    20.0000   20.0000   clock CLK (rise edge)
+     0.0000   20.0000   clock network delay (propagated)
+     0.0000   20.0000   clock reconvergence pessimism
+    -4.0000   16.0000   output external delay
+              16.0000   data required time
+  -------------------------------------------------------------
+              16.0000   data required time
+              -1.5706   data arrival time
+  -------------------------------------------------------------
+              14.4294   slack (MET)
+  ```
+
+The report can be found in `output/rvmyth_layout/sta.log` file.
 
 ### RVMYTH final GDSII layout
 
