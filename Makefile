@@ -92,6 +92,10 @@ rvmyth_layout: $(COMPILED_TLV_PATH)
 			-u 1000:1000 \
 			efabless/openlane:$(OPENLANE_VER) \
 			bash -c "./flow.tcl -design rvmyth -tag rvmyth_test | tee /VSDBabySoC/output/rvmyth_layout/layout.log"; \
+		rm -rf $(OUTPUT_PATH)/rvmyth_layout/rvmyth_test; \
+		cp -r $(OPENLANE_PATH)/designs/rvmyth/runs/* $(OUTPUT_PATH)/rvmyth_layout; \
+	else if [ ! -d "$(OUTPUT_PATH)/rvmyth_layout/rvmyth_test" ]; then \
+		mkdir -p $(OUTPUT_PATH)/rvmyth_layout; \
 		cp -r $(OPENLANE_PATH)/designs/rvmyth/runs/* $(OUTPUT_PATH)/rvmyth_layout; \
 	fi
 
