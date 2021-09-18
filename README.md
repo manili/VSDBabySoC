@@ -672,11 +672,154 @@ It is also possible to use our pre-build lib file in the `lib` folder.
 
 ### VSDBabySoC post-routing STA
 
+As we mentioned in the [RVMYTH post-routing STA](#rvmyth-post-routing-sta) section, in this step we are going to do STA on the VSDBabySoC design. First we should create a timing database that we will query for STA. Follow the instructions:
 
+  ```
+  $make mount
+  $./flow.tcl -design vsdbabysoc -tag vsdbabysoc_test -interactive | tee /VSDBabySoC/output/vsdbabysoc_layout/sta.log
+  %openroad
+  %read_lef designs/vsdbabysoc/runs/vsdbabysoc_test/tmp/merged.lef
+  %read_def designs/vsdbabysoc/runs/vsdbabysoc_test/results/cts/vsdbabysoc.cts.def
+  %write_db designs/vsdbabysoc/runs/vsdbabysoc_test/vsdbabysoc.db
+  ```
+
+Now we can query the database and excract the STA out of it by the following commands (**NOTE** that we are still in **OpenROAD** environment o/w we should re-enter the environment):
+
+  ```
+  %read_db designs/vsdbabysoc/runs/vsdbabysoc_test/vsdbabysoc.db
+  %read_verilog designs/vsdbabysoc/runs/vsdbabysoc_test/results/lvs/vsdbabysoc.lvs.powered.v
+  %read_liberty $::env(LIB_SYNTH_COMPLETE)
+  %link_design vsdbabysoc
+  %read_sdc designs/vsdbabysoc/src/base.sdc
+  %set_propagated_clock [all_clocks]
+  %report_checks -path_delay min_max -format full_clock_expanded -digits 4
+  %exit
+  %exit
+  $exit
+  ```
+
+Here is the `min_max` analysis result:
+
+  ```
+  Startpoint: _09726_ (rising edge-triggered flip-flop clocked by _20d7f40700000000_p_Pin)
+  Endpoint: _09716_ (rising edge-triggered flip-flop clocked by _20d7f40700000000_p_Pin)
+  Path Group: _20d7f40700000000_p_Pin
+  Path Type: min
+
+      Delay      Time   Description
+  -------------------------------------------------------------
+     0.0000    0.0000   clock _20d7f40700000000_p_Pin (rise edge)
+     0.0000    0.0000   clock source latency
+     0.0000    0.0000 ^ pll/CLK (avsdpll)
+     0.0941    0.0941 ^ clkbuf_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0697    0.1638 ^ clkbuf_1_0_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.0910    0.2548 ^ clkbuf_1_0_1_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.0987    0.3536 ^ clkbuf_2_0_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.0988    0.4523 ^ clkbuf_3_0_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.3767    0.8290 ^ clkbuf_4_0_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.2156    1.0446 ^ clkbuf_leaf_122_core.CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0000    1.0446 ^ _09726_/CLK (sky130_fd_sc_hd__dfxtp_4)
+     0.3178    1.3625 ^ _09726_/Q (sky130_fd_sc_hd__dfxtp_4)
+     0.0000    1.3625 ^ _09716_/D (sky130_fd_sc_hd__dfxtp_4)
+               1.3625   data arrival time
+
+     0.0000    0.0000   clock _20d7f40700000000_p_Pin (rise edge)
+     0.0000    0.0000   clock source latency
+     0.0000    0.0000 ^ pll/CLK (avsdpll)
+     0.0941    0.0941 ^ clkbuf_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0697    0.1638 ^ clkbuf_1_1_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.0982    0.2620 ^ clkbuf_1_1_1_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.1015    0.3635 ^ clkbuf_2_2_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.0988    0.4622 ^ clkbuf_3_5_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.3767    0.8389 ^ clkbuf_4_10_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.2215    1.0604 ^ clkbuf_opt_3_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.1079    1.1683 ^ clkbuf_leaf_7_core.CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0000    1.1683 ^ _09716_/CLK (sky130_fd_sc_hd__dfxtp_4)
+     0.0000    1.1683   clock reconvergence pessimism
+    -0.0301    1.1382   library hold time
+               1.1382   data required time
+  -------------------------------------------------------------
+               1.1382   data required time
+              -1.3625   data arrival time
+  -------------------------------------------------------------
+               0.2243   slack (MET)
+
+
+  Startpoint: _09616_ (rising edge-triggered flip-flop clocked by _20d7f40700000000_p_Pin)
+  Endpoint: _10369_ (rising edge-triggered flip-flop clocked by _20d7f40700000000_p_Pin)
+  Path Group: _20d7f40700000000_p_Pin
+  Path Type: max
+
+      Delay      Time   Description
+  -------------------------------------------------------------
+     0.0000    0.0000   clock _20d7f40700000000_p_Pin (rise edge)
+     0.0000    0.0000   clock source latency
+     0.0000    0.0000 ^ pll/CLK (avsdpll)
+     0.0941    0.0941 ^ clkbuf_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0697    0.1638 ^ clkbuf_1_1_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.0982    0.2620 ^ clkbuf_1_1_1_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.1015    0.3635 ^ clkbuf_2_3_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.0988    0.4622 ^ clkbuf_3_6_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.6264    1.0886 ^ clkbuf_4_13_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.2892    1.3779 ^ clkbuf_leaf_51_core.CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0000    1.3779 ^ _09616_/CLK (sky130_fd_sc_hd__dfxtp_1)
+     0.3062    1.6840 v _09616_/Q (sky130_fd_sc_hd__dfxtp_1)
+     0.1262    1.8102 v _06804_/X (sky130_fd_sc_hd__clkbuf_2)
+     0.0806    1.8908 ^ _06970_/Y (sky130_fd_sc_hd__inv_2)
+     0.0620    1.9528 v _06971_/Y (sky130_fd_sc_hd__nor2_1)
+     0.1709    2.1238 ^ _06972_/Y (sky130_fd_sc_hd__a21oi_1)
+     0.0471    2.1709 v _06975_/Y (sky130_fd_sc_hd__inv_2)
+     0.4843    2.6552 v _07025_/X (sky130_fd_sc_hd__or4b_1)
+     0.2211    2.8763 v _07030_/X (sky130_fd_sc_hd__o211a_1)
+     0.2285    3.1048 v _07163_/X (sky130_fd_sc_hd__o221a_1)
+     0.3643    3.4690 v _07291_/X (sky130_fd_sc_hd__o311a_2)
+     0.2678    3.7368 v _07329_/X (sky130_fd_sc_hd__o31a_1)
+     0.1614    3.8982 v _07344_/X (sky130_fd_sc_hd__o22a_1)
+     0.2762    4.1744 v _07345_/X (sky130_fd_sc_hd__o2bb2a_1)
+     0.2686    4.4430 v _09300_/X (sky130_fd_sc_hd__mux2_1)
+     0.2657    4.7087 v _09301_/X (sky130_fd_sc_hd__mux2_1)
+     0.2657    4.9743 v _09302_/X (sky130_fd_sc_hd__mux2_1)
+     0.2657    5.2400 v _09303_/X (sky130_fd_sc_hd__mux2_1)
+     0.2958    5.5358 v _09304_/X (sky130_fd_sc_hd__mux2_1)
+     0.2790    5.8148 v _09192_/X (sky130_fd_sc_hd__mux2_2)
+     0.1733    5.9881 v _05348_/X (sky130_fd_sc_hd__dlymetal6s2s_1)
+     0.2202    6.2082 v _05598_/X (sky130_fd_sc_hd__o221a_1)
+     0.0000    6.2082 v _10369_/D (sky130_fd_sc_hd__dfxtp_1)
+               6.2082   data arrival time
+
+    20.0000   20.0000   clock _20d7f40700000000_p_Pin (rise edge)
+     0.0000   20.0000   clock source latency
+     0.0000   20.0000 ^ pll/CLK (avsdpll)
+     0.0941   20.0941 ^ clkbuf_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0697   20.1638 ^ clkbuf_1_0_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.0910   20.2548 ^ clkbuf_1_0_1_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.0987   20.3536 ^ clkbuf_2_0_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.0988   20.4523 ^ clkbuf_3_0_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.3767   20.8290 ^ clkbuf_4_0_0_core.CLK/X (sky130_fd_sc_hd__clkbuf_1)
+     0.2353   21.0643 ^ clkbuf_leaf_117_core.CLK/X (sky130_fd_sc_hd__clkbuf_16)
+     0.0000   21.0643 ^ _10369_/CLK (sky130_fd_sc_hd__dfxtp_1)
+     0.0000   21.0643   clock reconvergence pessimism
+    -0.1063   20.9581   library setup time
+              20.9581   data required time
+  -------------------------------------------------------------
+              20.9581   data required time
+              -6.2082   data arrival time
+  -------------------------------------------------------------
+              14.7498   slack (MET)
+  ```
 
 ### VSDBabySoC final GDSII layout
 
+As we pointed out in section [RVMYTH final GDSII layout](#rvmyth-final-gdsii-layout), to see the final GDSII layout, we must first change directory to `output/vsdbabysoc_layout/vsdbabysoc_test/results/magic` (because we need to access `.magicrc` file) and then open the `vsdbabysoc.gds` file by `magic` software. So here it is:
 
+  ```
+  $cd ~/VSDBabySoC
+  $cd output/vsdbabysoc_layout/vsdbabysoc_test/results/magic
+  $magic vsdbabysoc.gds
+  ```
+Now here is the final result of the VSDBabySoC GDSII layout.
+
+  ![vsdbabysoc_layout](images/vsdbabysoc_layout.png)
 
 # Contributors
 
