@@ -611,11 +611,16 @@ It is also possible to use our pre-build lib file in the `lib` folder.
 
 #### AVSDPLL-a phase-locked-loop
 
-
+In this section we are going to talk about how to provide OpenLANE with those three files (i.e. LIB, GDS, LEF) of the AVSDPLL (AVSDPLL1_v8).
 
 ##### AVSDPLL Getting the IP core
 
+We get our verilog model of the PLL from [here](https://github.com/vsdip/rvmyth_avsdpll_interface). However, by progressing the project to the physical design flow we realize that this model is not based upon a real IP core. So we created a new model named `AVSDPLL` based on [this](https://github.com/lakshmi-sathi/avsdpll_1v8) IP. So first we need to clone the GitHub repo in an arbitrary directory (our choose is home).
 
+  ```
+  $cd ~
+  $git clone https://github.com/lakshmi-sathi/avsdpll_1v8.git
+  ```
 
 ##### AVSDPLL Preparing the LIB file
 
