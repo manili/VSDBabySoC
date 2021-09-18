@@ -566,11 +566,16 @@ The below diagram highlights the difference between a layout and a LEF (**Image 
 
 #### AVSDDAC-a ditital to analog converter
 
-
+In this section we are going to talk about how to provide OpenLANE with those three files (i.e. LIB, GDS, LEF) of the AVSDDAC.
 
 ##### AVSDDAC getting the IP core
 
+We used the DAC IP of [this](https://github.com/vsdip/avsddac_3v3_sky130_v1) link as our reference DAC IP core. So first we need to clone the GitHub repo in an arbitrary directory (our choose is home).
 
+  ```
+  $cd ~
+  $git clone https://github.com/vsdip/avsddac_3v3_sky130_v1.git
+  ```
 
 ##### AVSDDAC preparing the LIB file
 
