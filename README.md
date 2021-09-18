@@ -557,7 +557,12 @@ GDSII stream format, common acronym GDSII, is a database file format which is th
 
 #### LEF file and its usage
 
+For a PnR tool to correctly place and route a block (a macro or a std. cell), it doesn't need to know entire layout information of the block; just the pin positions, PR boundary is sufficient. These minimal and abstracted information is provided to the tool by the Library Exchange Format (LEF) file. LEF file also serves the purpose of protecting intellectual property and is basically of two types:
+- Cell LEF - It's an abstract view of the cell and only gives information about PR boundary, pin position and metal layer information of the cell.
+- Technology LEF - It contains information about available metal layer, via information, DRCs of particular technology used by placer and router and so on. [Reference](https://github.com/nickson-jose/vsdstdcelldesign/blob/master/README.md#introduction-to-lef)
+The below diagram highlights the difference between a layout and a LEF (**Image Courtesy:** Google):
 
+  ![lef_vs_gds](https://github.com/njose939/OpenLane/blob/master/Images/layout_vs_LEF.JPG?raw=true)
 
 #### AVSDDAC-a ditital to analog converter
 
