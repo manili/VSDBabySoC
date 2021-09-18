@@ -660,7 +660,14 @@ It is also possible to use our pre-build lib file in the `lib` folder.
 
 #### Creating proper SDC file
 
+VSDBabySoC does not support an external clock input because of the PLL IP core. So we need to find a way to introduce the `pll.CLK` output as the design clock for both STA an CTS. As a result we created a custom SDC file describing our special clock source. Here is the main part of it:
 
+  ```
+  set ::env(CLOCK_PORT) [get_pins {pll/CLK}]
+  set ::env(CLOCK_NET) {core.CLK}
+  ```
+
+In the first line we are trying to introduce the CLK output pin of the PLL as our clock port/pin. In the second line we're introducing the CLK net of the RVMYTH as the main clock net so the CTS could use it for clock tree synthesizing.
 
 #### MACRO floorplanning and placement
 
@@ -668,7 +675,13 @@ It is also possible to use our pre-build lib file in the `lib` folder.
 
 ### VSDBabySoC layout generation flow running
 
+The VSDBabySoC layout generation flow could be all started by the following command.
 
+  ```
+  $make vsdbabysoc_layout
+  ```
+
+[The script](Makefile#L75) will take care of the rest of the process. The process should take about 30mins depending on the PC/laptop hardware configurations. After that results can be found in the `output/vsdbabysoc_layout` folder.
 
 ### VSDBabySoC post-routing STA
 
