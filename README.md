@@ -579,7 +579,27 @@ We used the DAC IP of [this](https://github.com/vsdip/avsddac_3v3_sky130_v1) lin
 
 ##### AVSDDAC preparing the LIB file
 
+To create the .lib file, first we need a verilog model as an input for the perl script. Then by typing the following command in the terminal our `avsddac.lib` file will be generated. **PLEASE NOTE** that the verilog file needs to be in the same folder of the perl script.
 
+  ```
+  $cd <PATH_TO_THE_SCRIPT>
+  $cp <PATH_TO_INPUT_MODEL>/<MODEL>.v ./
+  $perl verilog_to_lib.pl <MODEL>.v <OUTPUT_NAME>
+  $rm <MODEL>.v
+  $mv <OUTPUT_NAME>.lib <DESTINATION_PATH>
+  ```
+
+As a result for AVSDDAC we'll have:
+
+  ```
+  $cd ~/VSDBabySoC/src/script
+  $cp ../module/avsddac.v ./
+  $perl verilog_to_lib.pl avsddac.v avsddac
+  $rm avsddac.v
+  $mv avsddac.lib ../lib
+  ```
+
+It is also possible to use our pre-build lib file in the `lib` folder.
 
 ##### AVSDDAC preparing the GDS file
 
@@ -599,7 +619,27 @@ We used the DAC IP of [this](https://github.com/vsdip/avsddac_3v3_sky130_v1) lin
 
 ##### AVSDPLL Preparing the LIB file
 
+To create the .lib file, first we need a verilog model as an input for the perl script. Then by typing the following command in the terminal our `avsdpll.lib` file will be generated. **PLEASE NOTE** that the verilog file needs to be in the same folder of the perl script.
 
+  ```
+  $cd <PATH_TO_THE_SCRIPT>
+  $cp <PATH_TO_INPUT_MODEL>/<MODEL>.v ./
+  $perl verilog_to_lib.pl <MODEL>.v <OUTPUT_NAME>
+  $rm <MODEL>.v
+  $mv <OUTPUT_NAME>.lib <DESTINATION_PATH>
+  ```
+
+As a result for AVSDPLL we'll have:
+
+  ```
+  $cd ~/VSDBabySoC/src/script
+  $cp ../module/avsdpll.v ./
+  $perl verilog_to_lib.pl avsdpll.v avsdpll
+  $rm avsdpll.v
+  $mv avsdpll.lib ../lib
+  ```
+
+It is also possible to use our pre-build lib file in the `lib` folder.
 
 ##### AVSDPLL Preparing the GDS file
 
