@@ -524,6 +524,90 @@ Now here is the final result of the RVMYTH GDSII layout.
 
   ![rvmyth_layout](images/rvmyth_layout.png)
 
+## VSDBabySoC-a mixed-signal RTL2GDSII flow
+
+
+
+### Prerequisites for mixed-signal implementation
+
+
+
+#### LIB file and its usage
+
+
+
+#### GDS file and its usage
+
+
+
+#### LEF file and its usage
+
+
+
+#### AVSDDAC-a ditital to analog converter
+
+
+
+##### AVSDDAC getting the IP core
+
+
+
+##### AVSDDAC preparing the LIB file
+
+
+
+##### AVSDDAC preparing the GDS file
+
+
+
+##### AVSDDAC preparing the LEF file
+
+
+
+#### AVSDPLL-a phase-locked-loop
+
+
+
+##### AVSDPLL Getting the IP core
+
+
+
+##### AVSDPLL Preparing the LIB file
+
+
+
+##### AVSDPLL Preparing the GDS file
+
+
+
+##### AVSDPLL Preparing the LEF file
+
+
+
+### VSDBabySoC layout generation flow configuration
+
+
+
+#### Creating proper SDC file
+
+
+
+#### MACRO floorplanning and placement
+
+
+
+### VSDBabySoC layout generation flow running
+
+
+
+### VSDBabySoC post-routing STA
+
+
+
+### VSDBabySoC final GDSII layout
+
+
+
 # Contributors
 
 - [Mohammad A. Nili](https://github.com/manili), M.S. Student at SRBIAU
