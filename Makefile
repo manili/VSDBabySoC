@@ -1,4 +1,8 @@
 SRC_PATH = src
+LIB_PATH = $(SRC_PATH)/lib
+GDS_PATH = $(SRC_PATH)/gds
+LEF_PATH = $(SRC_PATH)/lef
+SDC_PATH = $(SRC_PATH)/sdc
 MODULE_PATH = $(SRC_PATH)/module
 INCLUDE_PATH = $(SRC_PATH)/include
 LAYOUT_CONF_PATH = $(SRC_PATH)/layout_conf
@@ -23,6 +27,7 @@ sim: pre_synth_sim post_synth_sim
 clean:
 	rm -rf $(OUTPUT_PATH)
 	rm -rf $(OPENLANE_PATH)/designs/rvmyth
+	rm -rf $(OPENLANE_PATH)/designs/vsdbabysoc
 
 .PHONY: mount
 mount:
@@ -114,8 +119,40 @@ rvmyth_post_routing_sim: rvmyth_layout
 	if [ ! -f "$(OUTPUT_PATH)/rvmyth_layout/post_routing_sim.vcd" ]; then \
 		iverilog -o $(OUTPUT_PATH)/rvmyth_layout/post_routing_sim.out \
 			-DFUNCTIONAL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
-			$(MODULE_PATH)/testbench.powered.v \
+			$(MODULE_PATH)/testbench.rvmyth.post-routing.v \
 			$(OUTPUT_PATH)/rvmyth_layout/rvmyth_test/results/lvs/rvmyth.lvs.powered.v \
 			-I $(SRC_PATH)/gls_model; \
 		cd $(OUTPUT_PATH)/rvmyth_layout; ./post_routing_sim.out; \
+	fi
+
+vsdbabysoc_layout: $(COMPILED_TLV_PATH)
+	if [ ! -d "$(OPENLANE_PATH)/designs/vsdbabysoc" ]; then \
+		mkdir -p $(OUTPUT_PATH)/vsdbabysoc_layout; \
+		mkdir -p $(OPENLANE_PATH)/designs/vsdbabysoc; \
+		mkdir -p $(OPENLANE_PATH)/designs/vsdbabysoc/src; \
+		mkdir -p $(OPENLANE_PATH)/designs/vsdbabysoc/src/module; \
+		mkdir -p $(OPENLANE_PATH)/designs/vsdbabysoc/src/include; \
+		cp -r $(LAYOUT_CONF_PATH)/vsdbabysoc/* $(OPENLANE_PATH)/designs/vsdbabysoc; \
+		cp $(MODULE_PATH)/vsdbabysoc.v $(OPENLANE_PATH)/designs/vsdbabysoc/src/module; \
+		cp $(COMPILED_TLV_PATH)/rvmyth.v $(OPENLANE_PATH)/designs/vsdbabysoc/src/module; \
+		cp $(MODULE_PATH)/clk_gate.v $(OPENLANE_PATH)/designs/vsdbabysoc/src/module; \
+		cp $(COMPILED_TLV_PATH)/rvmyth_gen.v $(OPENLANE_PATH)/designs/vsdbabysoc/src/include; \
+		cp $(INCLUDE_PATH)/*.vh $(OPENLANE_PATH)/designs/vsdbabysoc/src/include; \
+		cp $(LIB_PATH)/*.lib $(OPENLANE_PATH)/designs/vsdbabysoc/src; \
+		cp $(GDS_PATH)/*.gds $(OPENLANE_PATH)/designs/vsdbabysoc/src; \
+		cp $(LEF_PATH)/*.lef $(OPENLANE_PATH)/designs/vsdbabysoc/src; \
+		cp $(SDC_PATH)/vsdbabysoc_layout.sdc $(OPENLANE_PATH)/designs/vsdbabysoc/src; \
+		docker run -it --rm \
+			-v $(OPENLANE_PATH):/openLANE_flow \
+			-v $(OPENLANE_PATH)/pdks:/openLANE_flow/pdks \
+			-v $(shell pwd):/VSDBabySoC \
+			-e PDK_ROOT=/openLANE_flow/pdks \
+			-u 1000:1000 \
+			efabless/openlane:$(OPENLANE_VER) \
+			bash -c "./flow.tcl -design vsdbabysoc -tag vsdbabysoc_test | tee /VSDBabySoC/output/vsdbabysoc_layout/layout.log"; \
+		rm -rf $(OUTPUT_PATH)/vsdbabysoc_layout/vsdbabysoc_test; \
+		cp -r $(OPENLANE_PATH)/designs/vsdbabysoc/runs/* $(OUTPUT_PATH)/vsdbabysoc_layout; \
+	elif [ ! -d "$(OUTPUT_PATH)/vsdbabysoc_layout/vsdbabysoc_test" ]; then \
+		mkdir -p $(OUTPUT_PATH)/vsdbabysoc_layout; \
+		cp -r $(OPENLANE_PATH)/designs/vsdbabysoc/runs/* $(OUTPUT_PATH)/vsdbabysoc_layout; \
 	fi

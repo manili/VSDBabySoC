@@ -35,6 +35,12 @@ library (avsddac) {
       max_transition : 2.5;
       capacitance : 0.001;
     }
+
+  pin (VREFL) {
+      direction : input;
+      max_transition : 2.5;
+      capacitance : 0.001;
+    }
     
 	pin (VSSA) {
       direction : input;
@@ -43,12 +49,6 @@ library (avsddac) {
     }
     
 	pin (VDDA) {
-      direction : input;
-      max_transition : 2.5;
-      capacitance : 0.001;
-    }
-    
-	pin (VREFL) {
       direction : input;
       max_transition : 2.5;
       capacitance : 0.001;

@@ -1,7 +1,7 @@
 read_verilog ./module/vsdbabysoc.v
 read_verilog -I./include ../output/compiled_tlv/rvmyth.v
 read_verilog -I./include ./module/clk_gate.v
-read_liberty -lib ./lib/avsd_pll_1v8.lib
+read_liberty -lib ./lib/avsdpll.lib
 read_liberty -lib ./lib/avsddac.lib
 read_liberty -lib ./lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 synth -top vsdbabysoc
