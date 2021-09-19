@@ -685,7 +685,7 @@ The VSDBabySoC layout generation flow could be all started by the following comm
   $make vsdbabysoc_layout
   ```
 
-[The script](Makefile#L75) will take care of the rest of the process. The process should take about 30mins depending on the PC/laptop hardware configurations. After that results can be found in the `output/vsdbabysoc_layout` folder.
+[The script](Makefile#L127) will take care of the rest of the process. The process should take about 30mins depending on the PC/laptop hardware configurations. After that results can be found in the `output/vsdbabysoc_layout` folder.
 
 ### VSDBabySoC post-routing STA
 
