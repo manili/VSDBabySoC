@@ -629,7 +629,11 @@ We can extract the GDS file of the AVSDDAC IP core from the `user_analog_project
 
   ![selected_dac](images/selected_dac.png)
 
-  4. Now press `X`
+  4. Now press `X` to extract what ever inside the `10bitdac_cap_layout_design` box. We can zoom-in by pressing `Z` key on the keyboard or by typing `findbox zoom` in the console of `Magic`. Also we can zoom-out by pressing `SHIFT + Z` keys on our keyboard. Here is the result:
+
+  ![inside_dac](images/inside_dac.png)
+
+  5. 
 
 ##### AVSDDAC preparing the LEF file
 
