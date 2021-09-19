@@ -628,7 +628,7 @@ We can extract the GDS file of the AVSDDAC IP core from the `user_analog_project
 
   ![selected_dac](images/selected_dac.png)
 
-  4. Now press `X` to extract what ever inside the `10bitdac_cap_layout_design` box. We can zoom-in by pressing `Z` key on the keyboard or by typing `findbox zoom` in the console of `Magic`. Also we can zoom-out by pressing `SHIFT + Z` keys on our keyboard. Here is the result:
+  4. Now press `X` to extract whatever inside the `10bitdac_cap_layout_design` box. We can zoom-in by pressing `Z` key on the keyboard or by typing `findbox zoom` in the console of `Magic`. Also we can zoom-out by pressing `SHIFT + Z` keys on our keyboard. Here is the result:
 
   ![inside_dac](images/inside_dac.png)
 
@@ -701,7 +701,41 @@ It is also possible to use our pre-build lib file in the `lib` folder.
 
 ##### AVSDPLL Preparing the GDS file
 
+To extract the GDS file from GitHub repo, we should first open the `PLL.mag` file with `Magic` tool and then create the GDS from it. So these instructions should be followed:
 
+  1. Change directory to the `~/avsdpll_1v8/Layout` folder.
+
+  ```
+  $cd ~/avsdpll_1v8/Layout
+  ```
+
+  2. Open `PLL.mag` file by following command:
+
+  ```
+  $magic PLL.mag -T ../sky130A.tech
+  ```
+
+  3. Select the whole layout by hovering mouse in free gray area and pressing `S` on the keyboard. Then centralize the selected layout by pressing `V`. Result should be like this:
+
+  ![selected_pll](images/selected_pll.png)
+
+  4. Now press `X` to extract whatever inside the `PLL` box.
+
+  ![inside_pll](images/inside_pll.png)
+
+  5. Rename the `PLL` cell to `avsdpll` by typing this command in the `Magic` console:
+
+  ```
+  %cellname rename PLL avsdpll
+  ```
+
+  6. Now we can save the layout by this command:
+
+  ```
+  %gds
+  ```
+
+  7. Now the `Magic` app could be closed by closing the console window and press `Yes` button.
 
 ##### AVSDPLL Preparing the LEF file
 
