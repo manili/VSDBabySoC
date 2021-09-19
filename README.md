@@ -628,22 +628,22 @@ We can extract the GDS file of the AVSDDAC IP core from the `user_analog_project
 
   ![selected_dac](images/selected_dac.png)
 
-  4. Now press `X` to extract whatever inside the `10bitdac_cap_layout_design` box. We can zoom-in by pressing `Z` key on the keyboard or by typing `findbox zoom` in the console of `Magic`. Also we can zoom-out by pressing `SHIFT + Z` keys on our keyboard. Here is the result:
+  4. Now press `X` to extract whatever inside the `10bitdac_cap_layout_design` box. We can zoom-in by pressing `Z` key on the keyboard or by typing `findbox zoom` in the `tkcon` console of the `Magic` app. Also we can zoom-out by pressing `SHIFT + Z` keys on our keyboard. Here is the result:
 
   ![inside_dac](images/inside_dac.png)
 
-  5. By typing the following commands in the console of `Magic`, we are going to create a new cell named `avsddac` from whatever inside the white box and load it as a new layout:
+  5. By typing the following commands in the `tkcon`, we are going to create a new cell named `avsddac` from whatever inside the white box and load it as a new layout:
 
   ```
   %flatten -dobox avsddac
   %load avsddac
   ```
 
-  6. Select the whole layout by hovering mouse in free gray area and pressing `S` on the keyboard. Then centralize the selected layout by pressing `V`. Result should be like this:
+  6. Select the whole layout by hovering mouse in free gray area and pressing `S` on the keyboard. Then switch to `Full View` mode by pressing `V`. Result should be like this:
 
   ![centralized_avsddac](images/centralized_avsddac.png)
 
-  7. Now all labels of the design should be removed by typing the following instruction in the `Magic` console (**NOTE** that we sould keep whole cell selected as the 6th step while executing the command.):
+  7. Now all labels of the design should be removed by typing the following instruction in the `tkcon` (**NOTE** that we sould keep whole cell selected as the 6th step while executing the command.):
 
   ```
   %erase label
@@ -656,7 +656,7 @@ We can extract the GDS file of the AVSDDAC IP core from the `user_analog_project
 
   **NOTE** that during the execution of `gds` command and saving process, an error like `1 problems occurred.  See feedback entries.` may happen which is safe to ignore.
 
-  9. Now we can close the `Magic` app by closing the console window and press `Yes` button.
+  9. Now we can close the `Magic` app by closing the `tkcon` window and press `Yes` button.
 
 ##### AVSDDAC preparing the LEF file
 
@@ -715,7 +715,7 @@ To extract the GDS file from GitHub repo, we should first open the `PLL.mag` fil
   $magic PLL.mag -T ../sky130A.tech
   ```
 
-  3. Select the whole layout by hovering mouse in free gray area and pressing `S` on the keyboard. Then centralize the selected layout by pressing `V`. Result should be like this:
+  3. Select the whole layout by hovering mouse in free gray area and pressing `S` on the keyboard. Then switch to `Full View` mode by pressing `V`. Result should be like this:
 
   ![selected_pll](images/selected_pll.png)
 
@@ -723,7 +723,7 @@ To extract the GDS file from GitHub repo, we should first open the `PLL.mag` fil
 
   ![inside_pll](images/inside_pll.png)
 
-  5. Rename the `PLL` cell to `avsdpll` by typing this command in the `Magic` console:
+  5. Rename the `PLL` cell to `avsdpll` by typing this command in the `tkcon`:
 
   ```
   %cellname rename PLL avsdpll
@@ -735,7 +735,7 @@ To extract the GDS file from GitHub repo, we should first open the `PLL.mag` fil
   %gds
   ```
 
-  7. Now the `Magic` app could be closed by closing the console window and press `Yes` button.
+  7. Now the `Magic` app could be closed by closing the `tkcon` window and press `Yes` button.
 
 ##### AVSDPLL Preparing the LEF file
 
