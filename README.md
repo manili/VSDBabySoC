@@ -102,6 +102,8 @@ It is not possible to sythesis an analog design with Verilog, yet. But there is 
   1. [Here](https://github.com/vsdip/rvmyth_avsdpll_interface) is the repo we used as a reference to model the PLL
   2. [Here](https://github.com/vsdip/rvmyth_avsddac_interface) is the repo we used as a reference to model the DAC
 
+**CAUTION:** In the beginning of the project, we get our verilog model of the PLL from [here](https://github.com/vsdip/rvmyth_avsdpll_interface). However, by proceeding the project to the physical design flow we realize that this model needs a little changes to become sufficient for a real IP core. So we changed it a little and created a new model named `AVSDPLL` based on [this](https://github.com/lakshmi-sathi/avsdpll_1v8) IP
+
 ## Step by step modeling walkthrough
 
 In this section we will walk you through the whole process of modeling the VSDBabySoC in details. We will increase/decrease the digital output value and feed it to the DAC model so we can watch the changes on the SoC output. Please, note that the following commands are tested on the Ubuntu Bionic (18.04.5) platform and no other OSes.
@@ -620,7 +622,7 @@ In this section we are going to talk about how to provide OpenLANE with those th
 
 ##### AVSDPLL Getting the IP core
 
-We get our verilog model of the PLL from [here](https://github.com/vsdip/rvmyth_avsdpll_interface). However, by progressing the project to the physical design flow we realize that this model is not based upon a real IP core. So we created a new model named `AVSDPLL` based on [this](https://github.com/lakshmi-sathi/avsdpll_1v8) IP. So first we need to clone the GitHub repo in an arbitrary directory (our choose is home).
+We used the PLL IP of [this](https://github.com/lakshmi-sathi/avsdpll_1v8) link as our reference PLL IP core. So first we need to clone the GitHub repo in an arbitrary directory (our choose is home).
 
   ```
   $cd ~
