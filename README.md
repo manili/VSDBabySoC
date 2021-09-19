@@ -615,8 +615,7 @@ We can extract the GDS file of the AVSDDAC IP core from the `user_analog_project
   1. Change directory to the folder which contains `user_analog_project_wrapper.gds` file:
 
   ```
-  $cd ~
-  $cd ~/avsddac_3v3_sky130_v1/caravel/gds
+  $cd ~/avsddac_3v3_sky130_v1/gds
   ```
 
   2. Open `user_analog_project_wrapper.gds` file by the `Magic` tool:
