@@ -106,7 +106,7 @@ It is not possible to sythesis an analog design with Verilog, yet. But there is 
 
 ## Step by step modeling walkthrough
 
-In this section we will walk you through the whole process of modeling the VSDBabySoC in details. We will increase/decrease the digital output value and feed it to the DAC model so we can watch the changes on the SoC output. Please, note that the following commands are tested on the Ubuntu Bionic (18.04.5) platform and no other OSes.
+In this section we will walk through the whole process of modeling the VSDBabySoC in details. We will increase/decrease the digital output value and feed it to the DAC model so we can watch the changes on the SoC output. Please, note that the following commands are tested on the Ubuntu Bionic (18.04.5) platform and no other OSes.
 
   1. First we need to install some important packages:
 
@@ -117,7 +117,7 @@ In this section we will walk you through the whole process of modeling the VSDBa
   $ pip3 install pyyaml click sandpiper-saas
   ```
 
-  2. Now you can clone this repository in arbitrary directory (we'll choose home directory here):
+  2. Now we can clone this repository in an arbitrary directory (we'll choose home directory here):
 
   ```
   $ cd ~
@@ -133,7 +133,7 @@ In this section we will walk you through the whole process of modeling the VSDBa
   
   The result of the simulation (i.e. `pre_synth_sim.vcd`) will be stored in the `output/pre_synth_sim` directory.
 
-  4. You can see the waveforms with following command:
+  4. We can see the waveforms by following command:
 
   ```
   $ gtkwave output/pre_synth_sim/pre_synth_sim.vcd
@@ -199,7 +199,7 @@ To perform the synthesis process do the following:
   $ make synth
   ```
 
-The heavy job will be done by the script. When the process has been done, you can see the result in the `output/synth/vsdbabysoc.synth.v` file.
+The heavy job will be done by the script. When the process has been done, we can see the result in the `output/synth/vsdbabysoc.synth.v` file.
 
 ## Post-synthesis simulation (GLS)
 
@@ -362,7 +362,7 @@ Here is the picture of the OpenLANE architecture:
 
   ![openlane_flow](images/openlane_flow.png)
 
-OpenLANE flow consists of several stages. By default all flow steps are run in sequence. Each stage may consist of multiple sub-stages. [Here](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/README.md) you can find a lot of info about the flow and its internal tools.
+OpenLANE flow consists of several stages. By default all flow steps are run in sequence. Each stage may consist of multiple sub-stages. Lots of info about the flow and its internal tools can be found [Here](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/README.md).
 
   * [This](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/docs/source/advanced_readme.md) link contains info about how to run OpenLANE in `interactive` mode.
   * [This](https://github.com/The-OpenROAD-Project/OpenLane/blob/master/configuration/README.md) link contains info about different variables for configuration.
@@ -625,11 +625,11 @@ We can extract the GDS file of the AVSDDAC IP core from the `user_analog_project
   $magic user_analog_project_wrapper.gds -T ../mag/sky130A.tech
   ```
 
-  3. Select the `10bitdac_cap_layout_design` box by hovering mouse over it and press `S` key on your keyboard. Now the box should be selected by white borders surround it just like the following picture.
+  3. Select the `10bitdac_cap_layout_design` box by hovering mouse over it and press `S` key on the keyboard. Now the box should be selected by white borders surround it just like the following picture.
 
   ![selected_dac](images/selected_dac.png)
 
-  4. 
+  4. Now press `X`
 
 ##### AVSDDAC preparing the LEF file
 
