@@ -388,7 +388,7 @@ We are using `OPENLANE_PATH` environment variable to reference the OpenLANE inst
 
 ### RVMYTH layout generation flow configuration
 
-We have provided minimum required configurations in [this](src/layout_conf/rvmyth/config.tcl) file. However, the file could be change accorting to other requirements. This file will be copied directly to the OpenLANE `designs/rvmyth` folder for layout implementation.
+We have provided minimum required configurations in [this](src/layout_conf/rvmyth/config.tcl) file. However, the file could be changed accorting to other requirements. This file will be copied directly to the OpenLANE `designs/rvmyth` folder for layout implementation.
 
 ### RVMYTH layout generation flow running
 
@@ -663,7 +663,7 @@ It is also possible to use our pre-build lib file in the `lib` folder.
 
 ### VSDBabySoC layout generation flow configuration
 
-
+We have provided minimum required configurations in [this](src/layout_conf/vsdbabysoc/config.tcl) file. However, the file could be changed accorting to other requirements. This file will be copied directly to the OpenLANE `designs/vsdbabysoc` folder for layout implementation.
 
 #### Creating proper SDC file
 
