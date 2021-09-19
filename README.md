@@ -676,9 +676,9 @@ In the first line we are trying to introduce the CLK output pin of the PLL as ou
 
 #### Floorplanning and placement configurations
 
-Our design contains some analog IP macros (i.e. PLL and DAC). The location of these macros should be specified by the designer for better FP/PP and placement. If the designer does not specify the location of macros, it may lead to OpenLANE flow failure. As a result we specify the macro location in [this](src/layout_conf/vsdbabysoc/macro.cfg) file.
-It is also a good idea to specify pin locations. This may significantly improve routing-phase speed and output. As a result we tried to specify location of pins in [this](src/layout_conf/vsdbabysoc/pin_order.cfg) file.
-Another important factor of the floorplanning and placement configurations, is the pin margin. By changing this factor we can increase chip boarders to prevent any kind of overlapping.
+  * Our design contains some analog IP macros (i.e. PLL and DAC). The location of these macros should be specified by the designer for better FP/PP and placement. If the designer does not specify the location of macros, it may lead to OpenLANE flow failure. As a result we specify the macro location in [this](src/layout_conf/vsdbabysoc/macro.cfg) file.
+  * It is also a good idea to specify pin locations. This may significantly improve routing-phase speed and output. As a result we tried to specify location of pins in [this](src/layout_conf/vsdbabysoc/pin_order.cfg) file.
+  * Another important factor of the floorplanning and placement configurations, is the pin margin. By changing this factor we can increase chip boarders to prevent any kind of overlapping.
 
 ### VSDBabySoC layout generation flow running
 
