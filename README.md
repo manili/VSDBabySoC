@@ -13,7 +13,7 @@ VSDBabySoC is a small SoC including PLL, DAC, and a RISCV-based processor named 
   - [PLL and DAC modeling](#pll-and-dac-modeling)
   - [Step by step modeling walkthrough](#step-by-step-modeling-walkthrough)
 - [OpenLANE](#openlane)
-  - [OpenLANE instalation](#openlane-installation)
+  - [OpenLANE installation](#openlane-installation)
 - [Post-synthesis simulation](#post-synthesis-simulation)
   - [Synthesizing using Yosys](#synthesizing-using-yosys)
   - [How to synthesize the design](#how-to-synthesize-the-design)
@@ -157,7 +157,7 @@ In this picture we can see the following signals:
 
 OpenLANE is an automated RTL to GDSII flow based on several components including OpenROAD, Yosys, Magic, Netgen, Fault, SPEF-Extractor and custom methodology scripts for design exploration and optimization. The main usage of OpenLANE in this project is for [VSDBabySoC Physical Design](#vsdbabysoc-physical-design). However, we need OpenLANE for the synthesis and STA process in the [Post-synthesis simulation](#post-synthesis-simulation) section. So we'll talk about its installation process here and let the details be until the [VSDBabySoC Physical Design](#vsdbabysoc-physical-design) section.
 
-## OpenLANE instalation
+## OpenLANE installation
 
 The OpenLANE and sky130 installation can be done by following the steps in this repository `https://github.com/nickson-jose/openlane_build_script`.
 
