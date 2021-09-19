@@ -553,7 +553,11 @@ In mixed-signal design, we instantiate the analog IP cores (e.g. PLL and DAC) as
 
 #### GDS file and its usage
 
-GDSII stream format, common acronym GDSII, is a database file format which is the de facto industry standard for data exchange of integrated circuit or IC layout artwork. It is a binary file format representing planar geometric shapes, text labels, and other information about the layout in hierarchical form. The data can be used to reconstruct all or part of the artwork to be used in sharing layouts, transferring artwork between different tools, or creating photomasks. [Reference](https://en.wikipedia.org/wiki/GDSII)
+GDSII stream format, common acronym GDSII (or GDS), is a database file format which is the de facto industry standard for data exchange of integrated circuit or IC layout artwork. It is a binary file format representing planar geometric shapes, text labels, and other information about the layout in hierarchical form. The data can be used to reconstruct all or part of the artwork to be used in sharing layouts, transferring artwork between different tools, or creating photomasks. [Reference](https://en.wikipedia.org/wiki/GDSII)
+In this project we'll need GDS file for two main reasons:
+
+  1. To extract the LEF file out of it (we'll cover the LEF file usage in the next topic.)
+  2. To create final full GDS layout
 
 #### LEF file and its usage
 
