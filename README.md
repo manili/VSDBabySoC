@@ -49,10 +49,11 @@ VSDBabySoC is a small SoC including PLL, DAC, and a RISCV-based processor named 
         - [AVSDPLL Preparing the LEF file](#avsdpll-preparing-the-lef-file)
     - [VSDBabySoC layout generation flow configuration](#vsdbabysoc-layout-generation-flow-configuration)
       - [Creating proper SDC file](#creating-proper-sdc-file)
-      - [MACRO floorplanning and placement](#macro-floorplanning-and-placement)
+      - [Floorplanning and placement configurations](#floorplanning-and-placement-configurations)
     - [VSDBabySoC layout generation flow running](#vsdbabysoc-layout-generation-flow-running)
     - [VSDBabySoC post-routing STA](#vsdbabysoc-post-routing-sta)
     - [VSDBabySoC final GDSII layout](#vsdbabysoc-final-gdsii-layout)
+- [Future works](#future-works)
 - [Contributors](#contributors)
 - [Acknowledgements](#acknowledgements)
 
@@ -664,18 +665,20 @@ It is also possible to use our pre-build lib file in the `lib` folder.
 
 #### Creating proper SDC file
 
-VSDBabySoC does not support an external clock input because of the PLL IP core. So we need to find a way to introduce the `pll.CLK` output as the design clock for both STA an CTS. As a result we created a custom SDC file describing our special clock source. Here is the main part of it:
+VSDBabySoC does not have an external clock input because of the PLL IP core. So we need to find a way to introduce the `pll.CLK` output as the design (SoC) clock for both STA an CTS. As a result we created a custom SDC file describing our special clock source. Here is the main part of it:
 
   ```
   set ::env(CLOCK_PORT) [get_pins {pll/CLK}]
   set ::env(CLOCK_NET) {core.CLK}
   ```
 
-In the first line we are trying to introduce the CLK output pin of the PLL as our clock port/pin. In the second line we're introducing the CLK net of the RVMYTH as the main clock net so the CTS could use it for clock tree synthesizing.
+In the first line we are trying to introduce the CLK output pin of the PLL as our clock port/pin. In the second line we're introducing the CLK net of the RVMYTH as the main clock net so the CTS could use it for clock tree synthesizing. **PLEASE NOTE** that both `CLOCK_PORT` and `CLOCK_NET` environments need to be filled with these info otherwise will have issues during the physical design flow.
 
-#### MACRO floorplanning and placement
+#### Floorplanning and placement configurations
 
-
+Our design contains some analog IP macros (i.e. PLL and DAC). The location of these macros should be specified by the designer for better FP/PP and placement. If the designer does not specify the location of macros, it may lead to OpenLANE flow failure. As a result we specify the macro location in [this](src/layout_conf/vsdbabysoc/macro.cfg) file.
+It is also a good idea to specify pin locations. This may significantly improve routing-phase speed and output. As a result we tried to specify location of pins in [this](src/layout_conf/vsdbabysoc/pin_order.cfg) file.
+Another important factor of the floorplanning and placement configurations, is the pin margin. By changing this factor we can increase chip boarders to prevent any kind of overlapping.
 
 ### VSDBabySoC layout generation flow running
 
@@ -837,6 +840,10 @@ As we pointed out in section [RVMYTH final GDSII layout](#rvmyth-final-gdsii-lay
 Now here is the final result of the VSDBabySoC GDSII layout.
 
   ![vsdbabysoc_layout](images/vsdbabysoc_layout.png)
+
+# Future works
+
+Currently our design have some LVS mismatches and about 635 DRC errors. We have to solve these issues to make GDSII layout ready for fabrication.
 
 # Contributors
 
