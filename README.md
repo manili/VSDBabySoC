@@ -610,7 +610,26 @@ It is also possible to use our pre-build lib file in the `lib` folder.
 
 ##### AVSDDAC preparing the GDS file
 
+We can extract the GDS file of the AVSDDAC IP core from the `user_analog_project_wrapper.gds` file by following these instructions:
 
+  1. Change directory to the folder which contains `user_analog_project_wrapper.gds` file:
+
+    ```
+    $cd ~
+    $cd ~/avsddac_3v3_sky130_v1/caravel/gds
+    ```
+
+  2. Open `user_analog_project_wrapper.gds` file by the `Magic` tool:
+
+    ```
+    $magic user_analog_project_wrapper.gds -T ../mag/sky130A.tech
+    ```
+
+  3. Select the `10bitdac_cap_layout_design` box by hovering mouse over it and press `S` key on your keyboard. Now the box should be selected by white borders surround it just like the following picture.
+
+    ![selected_dac](images/selected_dac.png)
+
+  4. 
 
 ##### AVSDDAC preparing the LEF file
 
