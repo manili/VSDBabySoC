@@ -655,7 +655,7 @@ We can extract the GDS file of the AVSDDAC IP core from the `user_analog_project
   %gds
   ```
 
-  **NOTE** that during running `gds` command and saving process and error like `1 problems occurred.  See feedback entries.` may happen which is safe to ignore.
+  **NOTE** that during the execution of `gds` command and saving process, an error like `1 problems occurred.  See feedback entries.` may happen which is safe to ignore.
 
   9. Now we can close the `Magic` app by closing the console window and press `Yes` button.
 
