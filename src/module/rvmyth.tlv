@@ -2,13 +2,22 @@
 \SV
    m4_include_lib(['https://raw.githubusercontent.com/shivanishah269/risc-v-core/master/FPGA_Implementation/riscv_shell_lib.tlv'])
    
+   // Module interface, either for Makerchip, or not.
+   m4_ifelse_block(M4_MAKERCHIP, 1, ['
+   // Makerchip module interface.
+   m4_makerchip_module
+   wire CLK = clk;
+   logic [9:0] OUT;
+   assign passed = cyc_cnt > 300;
+   '], ['
+   // Custom module interface for BabySoC.
    module rvmyth(
       output reg [9:0] OUT,
       input CLK,
       input reset
    );
-
    wire clk = CLK;
+   '])
    
 \TLV
    //
